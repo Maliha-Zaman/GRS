@@ -33,7 +33,7 @@ def register(request):
             # Create a new user instance and save it to the database
             
             hashed_password = make_password(password)
-            print(f"Hashed password: {hashed_password}")
+           
             user = User(username=username, email=email, password=hashed_password,verification_token=verification_token)
             user.save()
             verification_url = f"http://127.0.0.1:8000/verify/{verification_token}/"
@@ -46,7 +46,7 @@ def register(request):
             )
             return render(request, 'email_sent.html')
             # Redirect to the login page after successful registration
-            """return redirect('login')"""
+           
     else:
         form = RegistrationForm()
 
