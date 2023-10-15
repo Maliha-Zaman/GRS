@@ -1,0 +1,9 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% endif %}
+  </form>
+  
