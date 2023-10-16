@@ -1,16 +1,38 @@
-{% if user %}
-    <div class="header">
-        Welcome, {{ user.username }}!
-        <form action="{% url 'logout' %}" method="post" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit" class="logout-btn">Logout</button>
-        </form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Projects</title>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">Gesture Recognition</a></h1>
+        {% if user %}
+        <div class="header">
+            Welcome, {{ user.username }}!
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+
+        <!-- Display additional user information here -->
+        <p>Email: {{ user.email }}</p>
+        <!-- Add more user information fields as needed -->
+
+        {% else %}
+            <div class="header-buttons">
+                <a href="{% url 'login' %}" class="login-button">Login</a>
+                <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
+            </div>
+        {% endif %}
+        
+    </header>
+    <div class="content">
+        <p>Welcome to our project. We're glad to have you here!</p>
     </div>
-
-    <!-- Display additional user information here -->
-    <p>Email: {{ user.email }}</p>
-    <!-- Add more user information fields as needed -->
-
-{% else %}
-    <p>You are not logged in. <a href="{% url 'login' %}">Login</a> to view this content.</p>
-{% endif %}
+</body>
+</html>

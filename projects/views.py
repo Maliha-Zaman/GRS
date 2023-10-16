@@ -51,6 +51,7 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, 'registration/signup.html', {'form': form})
+
 def verify_email(request, verification_token):
     try:
         user = User.objects.get(verification_token=verification_token, is_verified=False)
@@ -60,6 +61,7 @@ def verify_email(request, verification_token):
         return render(request, 'email_verified.html')
     except User.DoesNotExist:
         return render(request, 'verification_failed.html')
+    
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -110,3 +112,7 @@ def logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']
     return redirect('login')
+
+def welcome(request):
+
+    return render(request, 'welcome.html')
