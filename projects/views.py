@@ -10,7 +10,7 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth.hashers import make_password
-
+from subprocess import Popen
 
 def register(request):
     if request.method == 'POST':
@@ -113,6 +113,9 @@ def logout(request):
         del request.session['user_id']
     return redirect('login')
 
-def welcome(request):
 
-    return render(request, 'welcome.html')
+
+def start_backend(request):
+    # Start the backend script (app.py)
+    Popen(["python", "app.py"])
+    return render(request, 'start_backend.html')

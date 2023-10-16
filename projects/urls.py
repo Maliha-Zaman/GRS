@@ -7,6 +7,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('', views.home, name='home'),
     path('verify/<str:verification_token>/', views.verify_email, name='verify_email'),
-    # ... other URL patterns for your app
+    path('start_backend/', views.start_backend, name='start_backend'),
    
 ]
