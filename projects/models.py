@@ -8,6 +8,7 @@ class User(models.Model):
     password = models.CharField(max_length=128)
     is_verified = models.BooleanField(default=False)
     verification_token = models.CharField(max_length=255, blank=True, null=True)
+    password_reset_token = models.CharField(max_length=255, blank=True, null=True)  # Add this line for the reset token
 
     def set_password(self, password):
         self.password = hashlib.sha256(password.encode()).hexdigest()
