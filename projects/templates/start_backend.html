@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Backend</title>
+</head>
+<body>
+    <h1>Click to Start Backend</h1>
+    <form method="post" action="{% url 'start_backend' %}">
+        {% csrf_token %}
+        <button type="submit">Start</button>
+    </form>
+</body>
+</html>
