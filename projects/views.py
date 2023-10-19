@@ -1,5 +1,6 @@
 import hashlib
 import secrets
+import re
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
@@ -10,8 +11,12 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth.hashers import make_password
+from django.shortcuts import get_object_or_404
 from subprocess import Popen
-
+def is_valid_password(password):
+    # Check if the password meets the criteria
+    regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+    return re.match(regex, password)
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -21,6 +26,8 @@ def register(request):
             password = form.cleaned_data['password']
             confirm_password = form.cleaned_data['confirm_password']
             verification_token = secrets.token_hex(16)
+            if not is_valid_password(password):
+                return render(request, 'registration/signup.html', {'form': form, 'error_message': 'Password must be at least 8 characters long, contain at least one special character, one uppercase letter, and one lowercase letter.'})
             if password != confirm_password:
                 return render(request, 'registration/signup.html', {'form': form, 'error_message': 'Passwords do not match.'})
 
@@ -87,7 +94,7 @@ def login(request):
                 else:
                     messages.error(request, 'Invalid login credentials.')
                     print("User does not exist or passwords do not match")
-                    return render(request, 'verification_failed.html')
+                    return render(request, 'verificatio_failed.html')
             except User.DoesNotExist:
                 messages.error(request, 'Invalid login credentials.')
 
@@ -119,3 +126,46 @@ def start_backend(request):
     # Start the backend script (app.py)
     Popen(["python", "app.py"])
     return render(request, 'start_backend.html')
+
+
+
+def start_backend(request):
+    # Start the backend script (app.py)
+    Popen(["python", "app.py"])
+    return render(request, 'start_backend.html')
+
+def send_password_reset_email(user):
+    token = secrets.token_urlsafe(20)  # Generate a random token
+    user.password_reset_token = token
+    user.save()
+
+    reset_link = f"http://127.0.0.1:8000/reset/{token}/"  # Replace with your actual domain
+    send_mail(
+        'Password Reset Request',
+        f'Click the following link to reset your password: {reset_link}',
+        'grs334669@gmail.com',
+        [user.email],
+        fail_silently=False,
+    )
+
+def password_reset_request(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+            send_password_reset_email(user)
+            messages.success(request, 'Password reset email sent successfully.')
+        except User.DoesNotExist:
+            messages.error(request, 'User with this email does not exist.')
+    return render(request, 'password_reset_request.html')
+
+def password_reset(request, token):
+    user = get_object_or_404(User, password_reset_token=token)
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        user.password = make_password(new_password)
+        user.password_reset_token = None  # Reset the token after password change
+        user.save()
+        messages.success(request, 'Password reset successful. You can now log in.')
+        return redirect('login')
+    return render(request, 'password_reset.html')
