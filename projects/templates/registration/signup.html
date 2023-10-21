@@ -6,7 +6,7 @@
 <header>
   <div class="title">    
       <h1>
-          <a href="#" style="text-decoration: none;">
+          <a href="{% url 'home' %}" style="text-decoration: none;">
               Gesture Recognition
           </a>
       </h1>
@@ -36,18 +36,24 @@
                 <div class="login__field">
                     <input type="password" class="login__input" name="confirm_password" placeholder="Confirm Password" required="" id="id_confirm_password" fdprocessedid="1kekx9">
                 </div>
-
+                
+                {% if error_message %}
+                    <div class="error">
+                        <p>{{ error_message }}</p>
+                    </div>
+                {% endif %}
+                    
                 <!-- {{ form.as_p }} -->
                 <button type="submit" class="submit">
                     <span class="button__text">
-                        Register
+                        Sign up
                     </span> 
                     <i class="button__icon fas fa-chevron-right"></i>
                 </button>
-                {% if error_message %}
-                    <p>{{ error_message }}</p>
-                {% endif %}
             </form>
+            <div class="form__text2">
+                Already have an account? <a href="{% url 'login' %}" class="form__link2">Login</a>
+            </div>
         </div>
         <div class="screen__background">
 			<span class="screen__background__shape screen__background__shape4"></span>

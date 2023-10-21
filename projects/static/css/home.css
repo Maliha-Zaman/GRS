@@ -20,17 +20,19 @@ body {
     color: white;
 }
 header {
-    background-color: #2700a977;
+    /* background-color: #2700a977; */
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     
 }
 
 h1 {
     margin: 0;
+    text-align: left;
 }
 
 .header-buttons {
@@ -41,66 +43,24 @@ h1 {
 .header-buttons a {
     text-decoration: none;
     padding: 10px 20px;
-    background-color: #9399a0;
+    background-color: #7875B5;
     color: #fff;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
 .header-buttons a:hover {
-    background-color: #0acda9;
+    background-color: #fff;
     color: black;
 }
-/* 
-.backend {
-    max-width: 1400px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    text-align: center;
-    align-items: center;
-    align-content: center;
-    display: flex
-}
-.content {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    text-align: center;
-}
 
-p {
-    font-size: 18px;
-    color: #333;
-    margin: 0;
-}
-.start_backend {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px; 
-    text-decoration: none; 
-    border-radius: 5px; 
-}
-.desc {
-    flex: 1;
-}
-.desc p{
-    margin-right: 20px;
-}
-.backend_button {
-    text-align: right;
-} */
-/* Container for the entire content */
 .backend {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 50px;
+    position: relative; /* Position relative to the containing header element */
+    z-index: 1; /* Place header content on top of the overlay */
 }
 
 /* Style for the description and button */
@@ -117,8 +77,8 @@ p {
 /* Style for the "Sign detector" button */
 .start_backend {
     display: inline-block;
-    background-color: #007bff; /* Change the background color as needed */
-    color: #fff; /* Change text color as needed */
+    background-color: #fff; /* Change the background color as needed */
+    color: #7875B5; /* Change text color as needed */
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -138,6 +98,45 @@ p {
 }
 
 .card{
-    background-color: antiquewhite;
+    background-color: #7875B5;
     margin-right: 200px;
+    color: white;
 }
+
+
+/* Styling for the video */
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Place the video behind other content */
+}
+
+/* Overlay for background dimming */
+/* .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); 
+    z-index: 0; 
+} */
+
+/* Styling for the header content */
+.title, .header, .header-buttons {
+    position: relative; /* Position relative to the containing header element */
+    z-index: 1; /* Place header content on top of the overlay */
+    color: white; /* Text color for the header content */
+    /* Add any other styles you want for the header content */
+}
+.content {
+    /* background-color: #59d28e; */
+    margin-top: 600px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+/* Additional styling for individual elements as needed */

@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Projects</title>
-    
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
 <body>
     <header>
+        <div class="backvid">
+            <video src="../static/videos/background_video.mp4" muted loop autoplay></video>
+        </div>
+        <div class="overlay"></div>
         <div class="title">    
             <h1>
                 <a href="#" style="text-decoration: none;">
@@ -18,7 +23,7 @@
         </div>
         {% if user %}
         <div class="header">
-            Welcome, {{ user.username }}!
+            <i class="login__icon fas fa-user"></i> {{ user.username }}
             <form action="{% url 'logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="logout-btn">Logout</button>
@@ -26,7 +31,7 @@
         </div>
 
         <!-- Display additional user information here -->
-        <p>Email: {{ user.email }}</p>
+        <!-- <p>Email: {{ user.email }}</p> -->
         <!-- Add more user information fields as needed -->
 
         {% else %}
@@ -37,24 +42,25 @@
         {% endif %}
         
     </header>
-    <video src="../static/videos/background_video.mp4" muted loop autoplay style="width: 100%;"></video>
+    <!-- <video src="../static/videos/background_video.mp4" muted loop autoplay style="width: 100%;"></video> -->
     <!-- <div class="content">
         <p>Welcome to our project. We're glad to have you here!</p>
     </div> -->
-    <div class="backend">
-        <div class="vid">
-            <video src="../" controls></video>
-        </div>
-        <div class="card">
+    <div class="content">
 
-            <div class="desc">
-                <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+        <div class="backend">
+            <div class="vid">
+                <!-- <video src="../" controls></video> -->
             </div>
-            <div class="backend_button">
-                <a href="{% url 'start_backend' %}" class="start_backend">Sign detector</a>
+            <div class="card">
+                <div class="desc">
+                    <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+                </div>
+                <div class="backend_button">
+                    <a href="{% url 'start_backend' %}" class="start_backend">Sign detector</a>
+                </div>
             </div>
         </div>
     </div>
-    <a href="{% url 'start_backend' %}" class="start_backend">Sign detector</a>
 </body>
 </html>

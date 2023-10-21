@@ -9,7 +9,6 @@ urlpatterns = [
     path('verify/<str:verification_token>/', views.verify_email, name='verify_email'),
     path('password_reset/', views.password_reset_request, name='password_reset_request'),
     path('reset/<str:token>/', views.password_reset, name='password_reset'),
-    
     path('start_backend/', views.start_backend, name='start_backend'),
    
 ]

@@ -4,7 +4,7 @@
 <header>
   <div class="title">    
       <h1>
-          <a href="#" style="text-decoration: none;">
+          <a href="{% url 'home' %}" style="text-decoration: none;">
               Gesture Recognition
           </a>
       </h1>
@@ -31,18 +31,23 @@
           <!-- <i class="login__icon fas fa-lock"></i> -->
           <!-- <label for="id_password">Password:</label> -->
           <input type="password" placeholder="Password" name="password" required="" id="id_password" fdprocessedid="co64zn" class="login__input">
+          {% if error_message %}
+          <div class="error">
+            <p>{{ error_message }}</p>
+          </div>
+          {% endif %}
         </div>
+        <p class="form__text"><a href="{% url 'password_reset_request' %}" class="form__link">Forgot Password?</a></p>
         <button type="submit" class="submit">
           <span class="button__text">
-            Login In
+            Login
           </span> 
           <i class="button__icon fas fa-chevron-right"></i>
         </button>
-        {% if error_message %}
-        <p>{{ error_message }}</p>
-        {% endif %}
-        
       </form>
+      <div class="form__text2">
+        Not signed in? <a href="{% url 'signup' %}" class="form__link2">Sign Up</a>
+      </div>
     </div>
     <div class="screen__background">
 			<span class="screen__background__shape screen__background__shape4"></span>
