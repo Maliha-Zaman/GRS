@@ -1,0 +1,143 @@
+projects/css/style.css 
+
+
+{
+    background-color: #59d28e;
+}
+body {
+    font-family: Arial, sans-serif;
+    /* background-color: #f2f2f2; */
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+.title {
+    font-size: 24px;
+    color: white; /* Blue color, you can change this */
+    text-decoration: none;
+}
+.title :visited{
+    color: white;
+}
+header {
+    background-color: #2700a977;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    
+}
+
+h1 {
+    margin: 0;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #9399a0;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.header-buttons a:hover {
+    background-color: #0acda9;
+    color: black;
+}
+/* 
+.backend {
+    max-width: 1400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    display: flex
+}
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+.start_backend {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+}
+.desc {
+    flex: 1;
+}
+.desc p{
+    margin-right: 20px;
+}
+.backend_button {
+    text-align: right;
+} */
+/* Container for the entire content */
+.backend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px;
+}
+
+/* Style for the description and button */
+.desc {
+    flex: 1;
+    padding: 20px;
+    max-width: 1000px;
+}
+
+.backend_button {
+    padding: 20px;
+}
+
+/* Style for the "Sign detector" button */
+.start_backend {
+    display: inline-block;
+    background-color: #007bff; /* Change the background color as needed */
+    color: #fff; /* Change text color as needed */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 200px;
+}
+
+.start_backend:hover {
+    background-color: #0056b3; /* Change the hover background color as needed */
+    color: #fff; /* Change text color on hover as needed */
+}
+
+.vid {
+    margin-left: 100px;
+    width: 1000px;
+}
+
+.card{
+    background-color: antiquewhite;
+    margin-right: 200px;
+}

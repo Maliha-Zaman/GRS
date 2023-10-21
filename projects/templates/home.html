@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <title>Welcome to Projects</title>
     
-    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
 <body>
     <header>
-        <h1><a href="{% url 'home' %}">Gesture Recognition</a></h1>
+        <div class="title">    
+            <h1>
+                <a href="#" style="text-decoration: none;">
+                    Gesture Recognition
+                </a>
+            </h1>
+        </div>
         {% if user %}
         <div class="header">
             Welcome, {{ user.username }}!
@@ -31,8 +37,23 @@
         {% endif %}
         
     </header>
-    <div class="content">
+    <video src="../static/videos/background_video.mp4" muted loop autoplay style="width: 100%;"></video>
+    <!-- <div class="content">
         <p>Welcome to our project. We're glad to have you here!</p>
+    </div> -->
+    <div class="backend">
+        <div class="vid">
+            <video src="../" controls></video>
+        </div>
+        <div class="card">
+
+            <div class="desc">
+                <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+            </div>
+            <div class="backend_button">
+                <a href="{% url 'start_backend' %}" class="start_backend">Sign detector</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

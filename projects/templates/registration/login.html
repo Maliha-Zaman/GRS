@@ -1,11 +1,53 @@
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-    {% if error_message %}
-      <p>{{ error_message }}</p>
-    {% endif %}
-  </form>
+<link rel="stylesheet" type="text/css" href="../../static/css/login.css">
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+<header>
+  <div class="title">    
+      <h1>
+          <a href="#" style="text-decoration: none;">
+              Gesture Recognition
+          </a>
+      </h1>
+  </div>
 
   
+      <div class="header-buttons">
+          <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
+      </div>
+  
+</header>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+      <form method="post" class="login">
+        {% csrf_token %}
+        <input type="hidden" name="csrfmiddlewaretoken" value="ScDNDLoo2R8MJlB65Ne7zeTScOYaW6zkBmvvp3t6b9A2rRV532CqSy6lvfAnw8Nw">
+        <div class="login__field">
+          <!-- <i class="login__icon fas fa-user"></i> -->
+            <!-- <label for="id_email">Email:</label> -->
+            <input type="email" placeholder="Email" name="email" maxlength="320" required="" id="id_email" class="login__input" fdprocessedid="h1g7s">
+        </div>
+        <div class="login__field">
+          <!-- <i class="login__icon fas fa-lock"></i> -->
+          <!-- <label for="id_password">Password:</label> -->
+          <input type="password" placeholder="Password" name="password" required="" id="id_password" fdprocessedid="co64zn" class="login__input">
+        </div>
+        <button type="submit" class="submit">
+          <span class="button__text">
+            Login In
+          </span> 
+          <i class="button__icon fas fa-chevron-right"></i>
+        </button>
+        {% if error_message %}
+        <p>{{ error_message }}</p>
+        {% endif %}
+      </form>
+    </div>
+    <div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>	
+  </div>
+</div>
