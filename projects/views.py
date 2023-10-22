@@ -69,39 +69,73 @@ def verify_email(request, verification_token):
     except User.DoesNotExist:
         return render(request, 'verification_failed.html')
     
+# def login(request):
+#     if request.method == 'POST':
+#         form = LoginForm(request.POST)
+#         if form.is_valid():
+#             email = form.cleaned_data['email']
+#             password = form.cleaned_data['password']
+            
+
+#             try:
+                
+#                 user = User.objects.get(email__iexact=email)
+#                 print(f"Entered password: {password}")
+#                 print(f"Stored password hash: {user.password}")
+#                 if user and check_password(password, user.password) and user.is_verified:
+                    
+#                     print("correctttt wowho")
+#                     # Correct password and verified user
+#                     session = Session(session_key=str(user.id))
+#                     session.expire_date = timezone.now() + timedelta(days=7)  
+#                     session.save()
+#                     request.session['user_id'] = user.id
+#                     return redirect('home')  # Redirect to the dashboard after successful login
+#                 else:
+#                     messages.error(request, 'Invalid login credentials.')
+#                     print("User does not exist or passwords do not match")
+#                     return render(request, 'verificatio_failed.html')
+#             except User.DoesNotExist:
+#                 messages.error(request, 'Invalid login credentials.')
+
+#     else:
+#         form = LoginForm()
+
+#     return render(request, 'registration/login.html', {'form': form})
+
 def login(request):
+    error_message = None  # Initialize error_message to None
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            
 
             try:
-                
                 user = User.objects.get(email__iexact=email)
                 print(f"Entered password: {password}")
                 print(f"Stored password hash: {user.password}")
                 if user and check_password(password, user.password) and user.is_verified:
-                    
                     print("correctttt wowho")
                     # Correct password and verified user
                     session = Session(session_key=str(user.id))
-                    session.expire_date = timezone.now() + timedelta(days=7)  
+                    session.expire_date = timezone.now() + timedelta(days=7)
                     session.save()
                     request.session['user_id'] = user.id
                     return redirect('home')  # Redirect to the dashboard after successful login
                 else:
-                    messages.error(request, 'Invalid login credentials.')
+                    error_message = 'Wrong email or password!'  # Set error_message
                     print("User does not exist or passwords do not match")
-                    return render(request, 'verificatio_failed.html')
             except User.DoesNotExist:
-                messages.error(request, 'Invalid login credentials.')
-
+                error_message = 'User does not exist'  # Set error_message
+                print("User does not exist")
+        else:
+            error_message = 'Form is not valid. Please check your input.'  # Set error_message for form validation errors
     else:
         form = LoginForm()
 
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form, 'error_message': error_message})
 
 
 def home(request):
