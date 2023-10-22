@@ -1,9 +1,67 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-    {% if error_message %}
-      <p>{{ error_message }}</p>
-    {% endif %}
-</form>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="../../static/css/signup.css">
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+
+<header>
+  <div class="title">    
+      <h1>
+          <a href="{% url 'home' %}" style="text-decoration: none;">
+              Gesture Recognition
+          </a>
+      </h1>
+  </div>
+
+  
+      <div class="header-buttons">
+          <a href="{% url 'login' %}" class="signup-button">Login</a>
+      </div>
+  
+</header>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+            <form method="post" class="login">
+                {% csrf_token %}
+                <input type="hidden" name="csrfmiddlewaretoken" value="i4D2mk0m5kwLQHKhF7vYHPUJkeDshIoo1evK8C54eCY1yd4gDmTh097cDFfFRKCA">
+                <div class="login__field">
+                    <input type="text" class="login__input" name="username" placeholder="Username" maxlength="100" required="" id="id_username" fdprocessedid="9jxxcd">
+                </div>
+                <div class="login__field">
+                    <input type="email" class="login__input" name="email" placeholder="Email" maxlength="320" required="" id="id_email" fdprocessedid="liifq">
+                </div>
+                <div class="login__field">
+                    <input type="password" class="login__input" name="password" placeholder="Password" required="" id="id_password" fdprocessedid="zhw1gr">
+                </div>
+                <div class="login__field">
+                    <input type="password" class="login__input" name="confirm_password" placeholder="Confirm Password" required="" id="id_confirm_password" fdprocessedid="1kekx9">
+                </div>
+                
+                {% if error_message %}
+                    <div class="error">
+                        <p>{{ error_message }}</p>
+                    </div>
+                {% endif %}
+                    
+                <!-- {{ form.as_p }} -->
+                <button type="submit" class="submit">
+                    <span class="button__text">
+                        Sign up
+                    </span> 
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+            <div class="form__text2">
+                Already have an account? <a href="{% url 'login' %}" class="form__link2">Login</a>
+            </div>
+        </div>
+        <div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>	
+    </div>
+</div>
+
   
