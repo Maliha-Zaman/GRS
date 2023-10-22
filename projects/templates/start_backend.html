@@ -3,6 +3,21 @@
 <head>
     <title>Start Backend</title>
 </head>
+<header>
+    <div class="title">    
+        <h1>
+            <a href="#" style="text-decoration: none;">
+                Gesture Recognition
+            </a>
+        </h1>
+    </div>
+  
+    
+        <div class="header-buttons">
+            <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
+        </div>
+    
+  </header>
 <body>
     <h1>Click to Start Backend</h1>
     <form method="post" action="{% url 'start_backend' %}">
