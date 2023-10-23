@@ -23,7 +23,7 @@
 		<div class="screen__content">
             <form method="post" class="login">
                 {% csrf_token %}
-                <input type="hidden" name="csrfmiddlewaretoken" value="i4D2mk0m5kwLQHKhF7vYHPUJkeDshIoo1evK8C54eCY1yd4gDmTh097cDFfFRKCA">
+                {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="i4D2mk0m5kwLQHKhF7vYHPUJkeDshIoo1evK8C54eCY1yd4gDmTh097cDFfFRKCA"> {% endcomment %}
                 <div class="login__field">
                     <input type="text" class="login__input" name="username" placeholder="Username" maxlength="100" required="" id="id_username" fdprocessedid="9jxxcd">
                 </div>
