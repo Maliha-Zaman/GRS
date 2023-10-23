@@ -67,7 +67,7 @@ h1 {
 	left: -100%;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(to right, #7d7ba3, #bfbde5);
+	background: linear-gradient(to right, #ffffff, #ffffff);
 	display: flex;
 	justify-content: center;
 	align-items: center; /* Center-align the content */
@@ -79,7 +79,7 @@ h1 {
   }
   
   .header-buttons a:hover {
-	color: white;
+	color: black;
 	background: transparent;
   }
   
