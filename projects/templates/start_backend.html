@@ -1,28 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Start Backend</title>
+    <title>Simulation</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/start_backend.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
 </head>
 <header>
     <div class="title">    
         <h1>
-            <a href="#" style="text-decoration: none;">
+            <a href="{% url 'home' %}" style="text-decoration: none;">
                 Gesture Recognition
             </a>
         </h1>
     </div>
-  
-    
+    <!-- {% if user %}
+    <div class="header">
+        <i class="login__icon fas fa-user"></i> {{ user.username }}
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div> -->
+        <!-- Display additional user information here -->
+        <!-- <p>Email: {{ user.email }}</p> -->
+        <!-- Add more user information fields as needed -->
+    <!-- {% else %}
         <div class="header-buttons">
+            <a href="{% url 'login' %}" class="login-button">Login</a>
             <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
         </div>
-    
+    {% endif %} -->
   </header>
 <body>
-    
-    <form method="post" action="{% url 'start_backend' %}">
-        {% csrf_token %}
-        <button type="submit">Start</button>
-    </form>
-</body>
+    <!-- <h1>Click to Start Backend</h1> -->
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form method="post" >
+                    {% csrf_token %} 
+                    <div class="login__field">
+                        <h1>Start Simulation</h1>
+                    </div> 
+                    <div class="Simulation">
+                        <video src="../static/videos/simulation.mp4" muted loop autoplay></video>
+                    </div>  
+                    <button type="submit" class="submit" action="{% url 'start_backend' %}">
+                    <span class="button__text">
+                        Start
+                    </span> 
+                    <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                </form>
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>		
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+    </div>
+        <!-- <form method="post" action="{% url 'start_backend' %}">
+            {% csrf_token %}
+            <button type="submit">Start</button>
+        </form> -->
+        <div class="footer">
+            <div className="container">
+                <!-- <hr /> -->
+                <div className="bottom">
+                  <div className="left">
+                    <h1>Gesture Recognition</h1>
+                  </div>
+                  <div className="right">
+                    
+                  </div>
+                </div>
+              </div>
+        </div>
+    </body>
 </html>
