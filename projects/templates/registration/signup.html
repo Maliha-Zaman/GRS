@@ -5,11 +5,11 @@
 
 <header>
   <div class="title">    
-      <h1>
+      
           <a href="{% url 'home' %}" style="text-decoration: none;">
-              Gesture Recognition
+              Gesture Recognition System
           </a>
-      </h1>
+      
   </div>
 
   
@@ -22,7 +22,7 @@
 	<div class="screen">
 		<div class="screen__content">
             <form method="post" class="login">
-                 {% csrf_token %} 
+                {% csrf_token %}
                 {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="i4D2mk0m5kwLQHKhF7vYHPUJkeDshIoo1evK8C54eCY1yd4gDmTh097cDFfFRKCA"> {% endcomment %}
                 <div class="login__field">
                     <input type="text" class="login__input" name="username" placeholder="Username" maxlength="100" required="" id="id_username" fdprocessedid="9jxxcd">
@@ -63,5 +63,24 @@
 		</div>	
     </div>
 </div>
+<footer class="footer">
+    <div class="containers">
+      <div class="row">
+        <div class="name">
+          <p>Gesture Recognition System</p>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <ul class="list-unstyled">
+              <li><h2 class="made-by">Made by:</h2></li>
+              <li>Mohammad Ittehad Rahman Sami</li>
+              <li>Maliha Zaman</li>
+              <li>Tamim Afnan</li>
+            </ul>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </footer>
 
   
