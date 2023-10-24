@@ -245,7 +245,18 @@ body {
   background-color: white;
   color: red;
   padding: 10px;
+  font-weight: bold;
   border-radius: 10px;
   border: 2px solid #776BCC;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.success-message {
+    background-color: white; /* Green background color */
+    color: #4b834b;
+	font-weight: bold; /* White text color */
+    padding: 10px; /* Padding around the message */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid #776BCC; /* Border color */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow */
+    margin-bottom: 20px; /* Margin below the message */
 }
