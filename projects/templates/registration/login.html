@@ -3,11 +3,11 @@
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
 <header>
   <div class="title">    
-      <h1>
+      
           <a href="{% url 'home' %}" style="text-decoration: none;">
-              Gesture Recognition
+              Gesture Recognition System
           </a>
-      </h1>
+      
   </div>
 
   
@@ -31,6 +31,7 @@
           <!-- <i class="login__icon fas fa-lock"></i> -->
           <!-- <label for="id_password">Password:</label> -->
           <input type="password" placeholder="Password" name="password" required="" id="id_password" fdprocessedid="co64zn" class="login__input">
+          <i class="fas fa-eye toggle-password"></i>
           {% if error_message %}
           <div class="error">
             <p>{{ error_message }}</p>
@@ -56,103 +57,45 @@
 			<span class="screen__background__shape screen__background__shape1"></span>
 		</div>	
   </div>
-</div>  {% endcomment %}
-<!DOCTYPE html>
-{% load static %}
-<html lang="en" dir="ltr">
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../static/css/login.css">
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Login</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-
-        #toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 40%;
-            cursor: pointer;
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <div class="title">
-            <h1>
-                <a href="{% url 'home' %}" style="text-decoration: none;">
-                    Gesture Recognition
-                </a>
-            </h1>
+</div>
+<footer class="footer">
+  <div class="containers">
+    <div class="row">
+      <div class="name">
+        <p>Gesture Recognition System</p>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <ul class="list-unstyled">
+            <li><h2 class="made-by">Made by:</h2></li>
+            <li>Mohammad Ittehad Rahman Sami</li>
+            <li>Maliha Zaman</li>
+            <li>Tamim Afnan</li>
+          </ul>
         </div>
-        <div class="header-buttons">
-            <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
-        </div>
-    </header>
+      </div>
+    </div>  
+  </div>
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const passwordField = document.querySelector('input[name="password"]');
+      const confirmPasswordField = document.querySelector('input[name="confirm_password"]');
+      const togglePassword = document.querySelectorAll('.toggle-password');
 
-    <div class="container">
-        <div class="screen">
-            <div class="screen__content">
-                <form method="post" class="login">
-                    {% csrf_token %}
-                    <div class="login__field">
-                        <input type="email" placeholder="Email" name="email" maxlength="320" required="" id="id_email" class="login__input" fdprocessedid="h1g7s">
-                    </div>
-                    <div class="login__field">
-                        <input type="password" placeholder="Password" name="password" required="" id="id_password" fdprocessedid="co64zn" class="login__input">
-                        <i class="fas fa-eye" id="toggle-password"></i>
-                        {% if error_message %}
-                        <div class="error">
-                            <p>{{ error_message }}</p>
-                        </div>
-                        {% endif %}
-                    </div>
-                    <p class="form__text"><a href="{% url 'password_reset_request' %}" class="form__link">Forgot Password?</a></p>
-                    <button type="submit" class="submit">
-                        <span class="button__text">
-                            Login
-                        </span>
-                        <i class="button__icon fas fa-chevron-right"></i>
-                    </button>
-                </form>
-                <div class="form__text2">
-                    Not signed in? <a href="{% url 'signup' %}" class="form__link2">Sign Up</a>
-                </div>
-            </div>
-            <div class="screen__background">
-                <span class="screen__background__shape screen__background__shape4"></span>
-                <span class="screen__background__shape screen__background__shape3"></span>
-                <span class="screen__background__shape screen__background__shape2"></span>
-                <span class="screen__background__shape screen__background__shape1"></span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const passwordField = document.querySelector('input[name="password"]');
-            const togglePassword = document.getElementById('toggle-password');
-
-            togglePassword.addEventListener('click', () => {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    togglePassword.classList.remove('fa-eye');
-                    togglePassword.classList.add('fa-eye-slash');
-                } else {
-                    passwordField.type = 'password';
-                    togglePassword.classList.remove('fa-eye-slash');
-                    togglePassword.classList.add('fa-eye');
-                }
-            });
-        });
-    </script>
-</body>
-
-</html>
+      togglePassword.forEach(function (element) {
+          element.addEventListener('click', function () {
+              if (element.previousElementSibling.type === 'password') {
+                  element.previousElementSibling.type = 'text';
+                  element.classList.remove('fa-eye');
+                  element.classList.add('fa-eye-slash');
+              } else {
+                  element.previousElementSibling.type = 'password';
+                  element.classList.remove('fa-eye-slash');
+                  element.classList.add('fa-eye');
+              }
+          });
+      });
+  });
+</script>
