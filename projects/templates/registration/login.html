@@ -31,6 +31,7 @@
           <!-- <i class="login__icon fas fa-lock"></i> -->
           <!-- <label for="id_password">Password:</label> -->
           <input type="password" placeholder="Password" name="password" required="" id="id_password" fdprocessedid="co64zn" class="login__input">
+          <i class="fas fa-eye toggle-password"></i>
           {% if error_message %}
           <div class="error">
             <p>{{ error_message }}</p>
@@ -77,3 +78,24 @@
     </div>  
   </div>
 </footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const passwordField = document.querySelector('input[name="password"]');
+      const confirmPasswordField = document.querySelector('input[name="confirm_password"]');
+      const togglePassword = document.querySelectorAll('.toggle-password');
+
+      togglePassword.forEach(function (element) {
+          element.addEventListener('click', function () {
+              if (element.previousElementSibling.type === 'password') {
+                  element.previousElementSibling.type = 'text';
+                  element.classList.remove('fa-eye');
+                  element.classList.add('fa-eye-slash');
+              } else {
+                  element.previousElementSibling.type = 'password';
+                  element.classList.remove('fa-eye-slash');
+                  element.classList.add('fa-eye');
+              }
+          });
+      });
+  });
+</script>
