@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %}
 <link rel="stylesheet" type="text/css" href="../../static/css/signup.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
@@ -24,7 +24,7 @@
             <form method="post" class="login">
                 {% csrf_token %}
                 {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="i4D2mk0m5kwLQHKhF7vYHPUJkeDshIoo1evK8C54eCY1yd4gDmTh097cDFfFRKCA"> {% endcomment %}
-                <div class="login__field">
+                {% comment %} <div class="login__field">
                     <input type="text" class="login__input" name="username" placeholder="Username" maxlength="100" required="" id="id_username" fdprocessedid="9jxxcd">
                 </div>
                 <div class="login__field">
@@ -44,7 +44,11 @@
                         <p>{{ error_message }}</p>
                     </div>
                 {% endif %}
-                    
+                {% if messages %}
+                {% for message in messages %}
+                <div class="success-message">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
                 <!-- {{ form.as_p }} -->
                 <button type="submit" class="submit">
                     <span class="button__text">
