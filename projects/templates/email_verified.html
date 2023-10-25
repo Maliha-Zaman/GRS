@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../static/css/start_backend.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
     <title>Email Verified</title>
 </head>
 <body>
-    <h1>Email Verified</h1>
-    <p>Your email address has been successfully verified.Now log in to your account.</p>
-    <a href="{% url 'login' %}">
-        <button>Continue to Login</button>
+    <h1 style="color: white;">Email Verified</h1>
+    <p style="color: white; text-align: center;">Your email address has been successfully verified.Now log in to your account.</p>
+    <div class="verified" style="justify-content: center; text-align: center; ">
+        <a href="{% url 'login' %}" >
+            <button class="logout-btn">Continue to Login</button>
+        </a>
+    </div>
 </body>
 
 </html>
