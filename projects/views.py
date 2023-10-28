@@ -51,7 +51,9 @@ def register(request):
                 [user.email],
                 fail_silently=False,
             )
-            return render(request, 'email_sent.html')
+            messages.success(request, 'Verification email has been sent. Please check your email to verify your account.')
+            return render(request, 'registration/signup.html', {'form': form})
+            
             # Redirect to the login page after successful registration
            
     else:
@@ -65,9 +67,10 @@ def verify_email(request, verification_token):
         # Mark the user as verified
         user.is_verified = True
         user.save()
-        return render(request, 'email_verified.html')
+        return render(request, 'registration/login.html')
     except User.DoesNotExist:
-        return render(request, 'verification_failed.html')
+        messages.error(request, 'Email verification failed. Please try again or contact support.')
+        return redirect('registration/signup.html')
     
 # def login(request):
 #     if request.method == 'POST':
@@ -185,7 +188,7 @@ def password_reset_request(request):
         try:
             user = User.objects.get(email=email)
             send_password_reset_email(user)
-            messages.success(request, 'Password reset email sent successfully.')
+            messages.success(request, 'Password reset email sent successfully. Check your email.')
         except User.DoesNotExist:
             messages.error(request, 'User with this email does not exist.')
     return render(request, 'password_reset_request.html')
@@ -199,4 +202,4 @@ def password_reset(request, token):
         user.save()
         messages.success(request, 'Password reset successful. You can now log in.')
         return redirect('login')
-    return render(request, 'password_reset.html')
+    return render(request, 'password_reset.html') 
