@@ -156,16 +156,13 @@ def logout(request):
 
 
 
-def start_backend(request):
-    # Start the backend script (app.py)
-    Popen(["python", "app.py"])
-    return render(request, 'start_backend.html')
-
-
 
 def start_backend(request):
-    # Start the backend script (app.py)
-    Popen(["python", "app.py"])
+    if request.method == 'POST':
+        # Check if the button was clicked
+        if 'start_button' in request.POST:
+            # Start the backend script (app.py)
+            Popen(["python", "app.py"])
     return render(request, 'start_backend.html')
 
 def send_password_reset_email(user):

@@ -6,7 +6,7 @@ import argparse
 import itertools
 from collections import Counter
 from collections import deque
-
+import time
 import cv2 as cv
 import numpy as np
 import mediapipe as mp
@@ -41,6 +41,9 @@ def get_args():
 def main():
     # Argument parsing #################################################################
     args = get_args()
+
+    start_time = time.time()
+    interval = 3
 
     cap_device = args.device
     cap_width = args.width
@@ -169,14 +172,51 @@ def main():
                     keypoint_classifier_labels[hand_sign_id],
                     point_history_classifier_labels[most_common_fg_id[0][0]],
                 )
+                # Hand sign classification
+                hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
+                # print("Hand Sign:", keypoint_classifier_labels[hand_sign_id])  # Print the hand sign
+
+                # ...
+
+                # Finger gesture classification
+                finger_gesture_id = 0
+                point_history_len = len(pre_processed_point_history_list)
+                if point_history_len == (history_length * 2):
+                    finger_gesture_id = point_history_classifier(pre_processed_point_history_list)
+                # print("Finger Gesture:", point_history_classifier_labels[finger_gesture_id])  # Print the finger gesture
+
+                # Display gestures in the terminal
+
+                current_time = time.time()
+                if current_time - start_time >= interval:
+                    # Print the hand sign and finger gesture
+                    print("Hand Sign:", keypoint_classifier_labels[hand_sign_id])
+                    # Reset the timing
+                    start_time = current_time
+
         else:
             point_history.append([0, 0])
 
         debug_image = draw_point_history(debug_image, point_history)
         debug_image = draw_info(debug_image, fps, mode, number)
+        
+
+        # # hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
+        # current_time = time.time()
+        # if current_time - start_time >= interval:
+        #     # Print the hand sign and finger gesture
+        #     print("Hand Sign:", keypoint_classifier_labels[hand_sign_id])
+        #     # print("Finger Gesture:", point_history_classifier_labels[finger_gesture_id])
+            
+        #     # Reset the timing
+        #     start_time = current_time
+
+        # debug_image = draw_point_history(debug_image, point_history)
+        # debug_image = draw_info(debug_image, fps, mode, number)
 
         # Screen reflection #############################################################
         cv.imshow('Hand Gesture Recognition', debug_image)
+        
 
     cap.release()
     cv.destroyAllWindows()
@@ -194,7 +234,7 @@ def select_mode(key, mode):
         mode = 2
     return number, mode
 
-
+#Calculates the bounding rectangle around a set of landmarks in an image
 def calc_bounding_rect(image, landmarks):
     image_width, image_height = image.shape[1], image.shape[0]
 
@@ -212,7 +252,7 @@ def calc_bounding_rect(image, landmarks):
 
     return [x, y, x + w, y + h]
 
-
+#Process these landmarks and return a list of (x, y) coordinates representing their positions in image space
 def calc_landmark_list(image, landmarks):
     image_width, image_height = image.shape[1], image.shape[0]
 
@@ -228,7 +268,7 @@ def calc_landmark_list(image, landmarks):
 
     return landmark_point
 
-
+#Prepare the landmark data for further analysis or machine learning tasks
 def pre_process_landmark(landmark_list):
     temp_landmark_list = copy.deepcopy(landmark_list)
 
@@ -255,7 +295,7 @@ def pre_process_landmark(landmark_list):
 
     return temp_landmark_list
 
-
+#Make the point coordinates relative, scale them, and flatten them into a one-dimensional list.
 def pre_process_point_history(image, point_history):
     image_width, image_height = image.shape[1], image.shape[0]
 
@@ -278,7 +318,7 @@ def pre_process_point_history(image, point_history):
 
     return temp_point_history
 
-
+#Logs data into different CSV files based on the values of the mode and number parameters.
 def logging_csv(number, mode, landmark_list, point_history_list):
     if mode == 0:
         pass
@@ -294,7 +334,7 @@ def logging_csv(number, mode, landmark_list, point_history_list):
             writer.writerow([number, *point_history_list])
     return
 
-
+#Visualize landmarks and key points on an image by drawing connecting lines and circles at specific locations on the hand
 def draw_landmarks(image, landmark_point):
     if len(landmark_point) > 0:
         # Thumb
@@ -482,7 +522,7 @@ def draw_landmarks(image, landmark_point):
 
     return image
 
-
+#Draw a bounding rectangle around a hand or object in an image
 def draw_bounding_rect(use_brect, image, brect):
     if use_brect:
         # Outer rectangle
@@ -491,7 +531,7 @@ def draw_bounding_rect(use_brect, image, brect):
 
     return image
 
-
+#Add information text to an image, which includes hand classification, hand sign, and finger gesture information
 def draw_info_text(image, brect, handedness, hand_sign_text,
                    finger_gesture_text):
     cv.rectangle(image, (brect[0], brect[1]), (brect[2], brect[1] - 22),
@@ -513,6 +553,8 @@ def draw_info_text(image, brect, handedness, hand_sign_text,
     return image
 
 
+
+#Visualize the history of points on an image by drawing circles with increasing radii for each point
 def draw_point_history(image, point_history):
     for index, point in enumerate(point_history):
         if point[0] != 0 and point[1] != 0:
@@ -521,7 +563,7 @@ def draw_point_history(image, point_history):
 
     return image
 
-
+#Add information text to an image
 def draw_info(image, fps, mode, number):
     cv.putText(image, "FPS:" + str(fps), (10, 30), cv.FONT_HERSHEY_SIMPLEX,
                1.0, (0, 0, 0), 4, cv.LINE_AA)
