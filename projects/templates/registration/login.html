@@ -1,4 +1,4 @@
-{% comment %} <link rel="stylesheet" type="text/css" href="../../static/css/login.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/login.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
 <header>
@@ -22,7 +22,7 @@
       <form method="post" class="login">
         {% csrf_token %}
         {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="ScDNDLoo2R8MJlB65Ne7zeTScOYaW6zkBmvvp3t6b9A2rRV532CqSy6lvfAnw8Nw"> {% endcomment %}
-        {% comment %} <div class="login__field">
+        <div class="login__field">
           <!-- <i class="login__icon fas fa-user"></i> -->
             <!-- <label for="id_email">Email:</label> -->
             <input type="email" placeholder="Email" name="email" maxlength="320" required="" id="id_email" class="login__input" fdprocessedid="h1g7s">

@@ -28,7 +28,7 @@ body {
   margin-left: 10px;
 }
 .logout-btn::before {
-	content: "Sign Up";
+	content: "Logout";
 	position: absolute;
 	top: 0;
 	left: -100%;

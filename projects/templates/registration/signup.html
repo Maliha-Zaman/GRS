@@ -1,4 +1,4 @@
-{% comment %} {% load static %}
+{% load static %}
 <link rel="stylesheet" type="text/css" href="../../static/css/signup.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
@@ -24,7 +24,7 @@
             <form method="post" class="login">
                 {% csrf_token %}
                 {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="i4D2mk0m5kwLQHKhF7vYHPUJkeDshIoo1evK8C54eCY1yd4gDmTh097cDFfFRKCA"> {% endcomment %}
-                {% comment %} <div class="login__field">
+                 <div class="login__field">
                     <input type="text" class="login__input" name="username" placeholder="Username" maxlength="100" required="" id="id_username" fdprocessedid="9jxxcd">
                 </div>
                 <div class="login__field">
