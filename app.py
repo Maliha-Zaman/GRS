@@ -190,7 +190,7 @@ def main():
                 current_time = time.time()
                 if current_time - start_time >= interval:
                     # Print the hand sign and finger gesture
-                    print("Hand Sign:", keypoint_classifier_labels[hand_sign_id])
+                    print(keypoint_classifier_labels[hand_sign_id])
                     # Reset the timing
                     start_time = current_time
 

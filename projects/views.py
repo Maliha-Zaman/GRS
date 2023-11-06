@@ -2,6 +2,7 @@ import hashlib
 import secrets
 import re
 from django.core.mail import send_mail
+from keytotext import pipeline
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
 from .models import User
@@ -13,6 +14,12 @@ from datetime import timedelta
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404
 from subprocess import Popen
+import subprocess
+
+nlp = pipeline("k2t")
+# keywords = ['Apple', 'Iphone', 'Samsung']
+# print(nlp(keywords))
+
 def is_valid_password(password):
     # Check if the password meets the criteria
     regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
@@ -161,12 +168,17 @@ def logout(request):
 
 
 def start_backend(request):
+    re = ""
+
     if request.method == 'POST':
         # Check if the button was clicked
         if 'start_button' in request.POST:
             # Start the backend script (app.py)
-            Popen(["python", "app.py"])
-    return render(request, 'start_backend.html')
+            # Popen(["python", "app.py"])
+            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+            result = ' '.join(result.splitlines())
+            re = (nlp(result))
+    return render(request, 'start_backend.html',{'gestures_output': re})
 
 def send_password_reset_email(user):
     token = secrets.token_urlsafe(20)  # Generate a random token
@@ -203,3 +215,12 @@ def password_reset(request, token):
         messages.success(request, 'Password reset successful. You can now log in.')
         return redirect('login')
     return render(request, 'password_reset.html') 
+
+
+
+def display_gestures(request):
+    # Run your script to get hand gestures
+    result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+    
+    # Pass the result to the template
+    return render(request, 'gestures.html', {'gestures_output': result})
