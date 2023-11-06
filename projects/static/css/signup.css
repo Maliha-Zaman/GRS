@@ -5,7 +5,7 @@ Reset some default browser styles
   }
   body{
 	font-family: "Raleway", sans-serif;
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);
+	background: linear-gradient(90deg,#776BCC, #C7C5F4 );
 	line-height: 1.8;
 }
   .title {
@@ -92,7 +92,7 @@ h1 {
 }
 
 body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	background: linear-gradient(90deg, #776BCC, #C7C5F4 );		
 }
 
 .container {
