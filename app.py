@@ -43,7 +43,7 @@ def main():
     args = get_args()
 
     start_time = time.time()
-    interval = 3
+    interval = 5
 
     cap_device = args.device
     cap_width = args.width
