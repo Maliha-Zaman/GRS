@@ -15,11 +15,16 @@ from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404
 from subprocess import Popen
 import subprocess
-
+import googletrans
+from happytransformer import HappyTextToText
+from happytransformer import TTSettings
+from googletrans import Translator
 nlp = pipeline("k2t")
+
 # keywords = ['Apple', 'Iphone', 'Samsung']
 # print(nlp(keywords))
-
+args = TTSettings(num_beams=5, min_length=1)
+happy_tt = HappyTextToText("T5", "vennify/t5-base-grammar-correction")
 def is_valid_password(password):
     # Check if the password meets the criteria
     regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
@@ -169,7 +174,7 @@ def logout(request):
 
 def start_backend(request):
     re = ""
-
+    re1 = ""
     if request.method == 'POST':
         # Check if the button was clicked
         if 'start_button' in request.POST:
@@ -177,8 +182,13 @@ def start_backend(request):
             # Popen(["python", "app.py"])
             result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
             result = ' '.join(result.splitlines())
-            re = (nlp(result))
-    return render(request, 'start_backend.html',{'gestures_output': re})
+            # re = (nlp(result))
+            re = happy_tt.generate_text(result, args=args)
+            translator = Translator()
+            re1 = translator.translate(re, dest='bn').text
+    return render(request, 'start_backend.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+
+# whisper api
 
 def send_password_reset_email(user):
     token = secrets.token_urlsafe(20)  # Generate a random token
