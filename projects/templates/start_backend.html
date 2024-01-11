@@ -37,14 +37,31 @@
     <div class="container">
         <div class="screen">
             <div class="screen__content">
+              {% comment %} <form method="post" action="{% url 'audio' %}">
+                {% csrf_token %}
+                <button type="submit" name="audio">Convert to Audio</button> {% endcomment %}
+                <!-- Include other HTML elements for your page -->
+            
+                <!-- Display the 're' variable content -->
+                <p>{{ gestures_output }}</p>
+                <p>{{ gestures_output_bangla }}</p>
+              {% comment %} </form> {% endcomment %}
+              <div class="login__field">
+                  <p class="text">Start Simulation</p>
+                  
+              </div>
                 <form method="post" >
                     {% csrf_token %} 
-                    <div class="login__field">
-                        <p class="text">Start Simulation</p>
-                        
+                    {% comment %} <div class="output">
+                      <p><pre>{{ gestures_output }}</pre></p> 
                     </div>
-                    <p><pre>{{ gestures_output }}</pre></p> 
-                    <p><pre>{{ gestures_output_bangla }}</pre></p> 
+                    <p><pre>{{ gestures_output_bangla }}</pre></p>  {% endcomment %}
+                    {% comment %} <button type="submit" name="audio" class="audio" action="{% url 'audio' %}">
+                      <span class="button__text">
+                          Audio
+                      </span> 
+                      <i class="button__icon fas fa-chevron-right"></i>
+                      </button>  {% endcomment %}
                     <div class="Simulation">
                         <video src="../static/videos/simulation.mp4" muted loop autoplay></video>
                     </div>  
