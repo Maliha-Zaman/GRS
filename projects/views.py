@@ -202,6 +202,51 @@ def start_backendMultiple(request):
             translator = Translator()
             re1 = translator.translate(re, dest='bn').text
     return render(request, 'start_backendMultiple.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+# def test(request):
+#     re = ""
+#     ans = ""
+#     text = request.POST.get('text', '')  # Ensure text is not None
+#     if request.method == 'POST':
+#         # Check if the button was clicked
+#         if 'test' in request.POST:
+#             # Start the backend script (app.py)
+#             try:
+#                 re = subprocess.check_output(['python', 'test.py'], universal_newlines=True)
+#                 re = re.strip()  # Remove leading/trailing whitespaces
+#                 if re.lower() == text.lower():  # Case-insensitive comparison
+#                     ans = True
+#                 else:
+#                     ans = False
+#             except subprocess.CalledProcessError as e:
+#                 # Handle subprocess error if needed
+#                 ans = False
+#     return render(request, 'test.html', {'gestures_output': re, 'gestures_output_bangla': ans})
+
+def test(request):
+    re = ""
+    ans = ""
+    text = request.POST.get('text', '')  # Ensure text is not None
+    if request.method == 'POST':
+        # Check if the button was clicked
+        if 'test' in request.POST:
+            try:
+                re = subprocess.check_output(['python', 'test.py'], universal_newlines=True)
+                re_lines = re.strip().splitlines()
+                if re_lines:
+                    re = re_lines[-1]  # Extract the last line
+                    re = re.strip()
+                    if re.lower() == text.lower():  # Case-insensitive comparison
+                        ans = True
+                    else:
+                        ans = False
+                else:
+                    ans = False  # No lines in the output
+            except subprocess.CalledProcessError as e:
+                # Handle subprocess error if needed
+                ans = False
+
+    return render(request, 'test.html', {'gestures_output': re, 'gestures_output_bangla': ans})
+
 # whisper api
 def gestureTest(request):
     re = ""

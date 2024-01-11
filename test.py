@@ -101,7 +101,9 @@ def main():
 
     #  ########################################################################
     mode = 0
-    
+    countdown_start_time = time.time()
+    countdown_duration = 6
+    countdown_active = True
     while True:
         fps = cvFpsCalc.get()
 
@@ -110,7 +112,14 @@ def main():
         if key == 27:  # ESC
             break
         number, mode = select_mode(key, mode)
-
+        
+        # Check for countdown completion
+        current_time = time.time()
+        if countdown_active and current_time - countdown_start_time >= countdown_duration:
+            countdown_active = False
+            # Return the output from the frame at the end of the countdown
+            return debug_image
+        
         # Camera capture #####################################################
         ret, image = cap.read()
         if not ret:
@@ -190,9 +199,12 @@ def main():
                 current_time = time.time()
                 if current_time - start_time >= interval:
                     # Print the hand sign and finger gesture
-                    print(keypoint_classifier_labels[hand_sign_id])
                     # Reset the timing
+                    print(keypoint_classifier_labels[hand_sign_id])
                     start_time = current_time
+                    
+                    # Screen reflection #############################################################
+            cv.imshow('Hand Gesture Recognition', debug_image)
 
         else:
             point_history.append([0, 0])

@@ -13,9 +13,7 @@ urlpatterns = [
     path('start_backendMultiple/', views.start_backendMultiple, name='start_backendMultiple'),
     path('gestureTest/', views.gestureTest, name='gestureTest'),
      path('features/', views.features, name='features'),
+    path('test/', views.test, name='test'),
     # path('gestures/', views.gestures_view, name='gestures'),
     path('display-gestures/', views.display_gestures, name='display_gestures'),
-
-
-
 ]
