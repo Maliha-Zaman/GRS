@@ -45,7 +45,7 @@
                 <form method="post" >
                     {% csrf_token %} 
                     <div class="login__field">
-                        <p class="text">Start Simulation</p>
+                        <p class="text">Start Moving gesture Simulation</p>
                         
                     </div>
                     <p><pre>{{ gestures_output }}</pre></p> 
@@ -59,7 +59,7 @@
                     </span> 
                     <i class="button__icon fas fa-chevron-right"></i>
                     </button> {% endcomment %}
-                    <button type="submit" name="start_button" class="submit" action="{% url 'start_backend' %}">
+                    <button type="submit" name="start_button" class="submit" action="{% url 'start_backendMultiple' %}">
                       <div class="svg-wrapper-1">
                           <div class="svg-wrapper">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

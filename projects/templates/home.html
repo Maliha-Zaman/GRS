@@ -1,93 +1,4 @@
-<!-- {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to Projects</title>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-</head>
-<body>
-    <header>
-        <div class="backvid">
-            <video src="../static/videos/background_video.mp4" muted loop autoplay></video>
-        </div>
-        <div class="overlay"></div>
-        <div class="title">    
-            <h1>
-                <a href="{% url 'home' %}" style="text-decoration: none;">
-                    Gesture Recognition
-                </a>
-            </h1>
-        </div>
-        {% if user %}
-        <div class="header">
-            <i class="login__icon fas fa-user"></i> {{ user.username }}
-            <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="logout-btn">Logout</button>
-            </form>
-        </div>
 
-        <!-- Display additional user information here -->
-        <!-- <p>Email: {{ user.email }}</p> -->
-        <!-- Add more user information fields as needed -->
-<!-- 
-        {% else %}
-            <div class="header-buttons">
-                <a href="{% url 'login' %}" class="login-button">Login</a>
-                <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
-            </div>
-        {% endif %}
-        
-    </header> -->
-    <!-- <video src="../static/videos/background_video.mp4" muted loop autoplay style="width: 100%;"></video> -->
-    <!-- <div class="content">
-        <p>Welcome to our project. We're glad to have you here!</p>
-    </div> -->
-    <!-- <div class="content">
-
-        <div class="backend">
-            <div class="vid">
-                <!-- <video src="../" controls></video> -->
-            <!-- </div>
-            <div class="card">
-                <div class="desc">
-                    <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
-                </div>
-                <div class="backend_button">
-                    <a href="{% url 'start_backend' %}" class="start_backend">Sign detector</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <div className="container">
-            
-            <div className="bottom">
-              <div className="left">
-                <h1>Gesture Recognition</h1>
-              </div>
-              <div className="right">
-                <div className="social">
-                </div>
-                <div className="link">
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-</body>
-</html>  -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -132,12 +43,9 @@
                   <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
                 </div>
             {% endif %}
-            <!-- <a href="#section-services" class="nav-link">Services</a></li>
-            <li class="nav-item active"><a href="#section-pricing" class="nav-link">Pricing</a></li> -->
-            <!-- <li class="nav-item active"><a href="#section-about" class="nav-link">About</a></li> -->
-            <!-- <li class="nav-item active"><a href="#section-contact" class="nav-link">Contact</a></li> -->
+           
           </ul>
-        <!-- </div> -->
+        
       </div>
     </nav>
     <!-- END nav -->
@@ -189,6 +97,8 @@
                     <img src="{% static 'images/Open.jpg' %}" alt="" class="close-hand" style="width: 200px;">
                 </div>
             </div>
+        
+            
             <div class="media-body" style="margin-top: 280px; background-color: #a19df5; color: #fff;">
                 <div class="mt-0">
                     <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Simulation</h3>
@@ -199,6 +109,7 @@
                     <a href="{% url 'start_backend' %}"><button  class="simulation-button">Simulation</button></a>
                 </div>
             </div>
+            
             <div class="media-body" style="margin-top: -270px;">
                 <div class="mt-0">
                     <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Okay</h3>
@@ -207,26 +118,31 @@
                     <img src="{% static 'images/Okay.jpeg' %}" alt="" class="close-hand" style="width: 200px;">
                 </div>
             </div>
+            
+            <div class="media-body" style="margin-top: 30px; margin-right: 390px; background-color: #a19df5; color: #fff;">
+              <div class="mt-0">
+                  <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Simulation</h3>
+              </div>
+              <div class="card-component">
+                  <p class="mb-5">Our website allows you to access a real-time practice session for moving gestures. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+              
+                  <a href="{% url 'start_backendMultiple' %}"><button  class="simulation-button">Simulation</button></a>
+              </div>
+          </div>
+          <div class="media-body" style="margin-top: -520px; margin-left: 780px; background-color: #a19df5; color: #fff;">
+            <div class="mt-0">
+                <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Simulation</h3>
+            </div>
+            <div class="card-component">
+                <p class="mb-5">Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+            
+                <a href="{% url 'gestureTest' %}"><button  class="simulation-button">Simulation</button></a>
+            </div>
+        </div>
+          
         </div>
       </div>
-          <!-- <div class="col-lg-4 col-md-6" style="margin-top: 160px;">
-            <div class="media d-block mb-4 text-center ftco-media p-md-5 p-4 ftco-animate"> -->
-              <!-- <div class="media-body">
-                <h5 class="mt-0">Simulation</h5>
-                <p class="mb-5">Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
-                <p class="mb-0"><a href="{% url 'start_backend' %}" class="btn btn-primary btn-sm">Simulation</a></p>
-              </div>
-            </div>
-          </div> -->
-          
-          <!-- <div class="col-lg-4 col-md-6" style="margin-top: -150px;">
-            <div class="media d-block mb-4 text-center ftco-media p-md-5 p-4 ftco-animate">
-              <div class="media-body">
-                <h5 class="mt-0">Okay</h5>
-                <img src="Okay.jpeg" alt="" class="close-hand" style="width: 200px;">
-              </div>
-            </div>
-          </div> -->
+         
     </section>
     <!-- END section -->
 
@@ -250,23 +166,7 @@
       </div>
     </footer>
 
-    <!-- loader -->
-    <!-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#4586ff"/></svg></div> -->
-
-
-    
-    <!-- <script src="js/popper.min.js"></script> -->
-    <!-- <script src="js/bootstrap.min.js"></script> -->
-    <!-- <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script> -->
-    
-
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="js/google-map.js"></script>
-
-    <script src="js/main.js"></script> -->
+   
 
     
   </body>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,14 @@
                 <form method="post" >
                     {% csrf_token %} 
                     <div class="login__field">
-                        <p class="text">Start Simulation</p>
+                      <label for="gestureSelect">Select Gesture:</label>
+                      <select id="gestureSelect" name="gesture_name">
+                   <option value="gesture1">Gesture 1</option>
+                   <option value="gesture2">Gesture 2</option>
+                   <option value="gesture3">Gesture 3</option>
+      <!-- Add more gesture options as needed -->
+  </select>
+                       
                         
                     </div>
                     <p><pre>{{ gestures_output }}</pre></p> 
@@ -59,7 +67,7 @@
                     </span> 
                     <i class="button__icon fas fa-chevron-right"></i>
                     </button> {% endcomment %}
-                    <button type="submit" name="start_button" class="submit" action="{% url 'start_backend' %}">
+                    <button type="submit" name="start_button" class="submit" action="{% url 'gestureTest' %}">
                       <div class="svg-wrapper-1">
                           <div class="svg-wrapper">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
