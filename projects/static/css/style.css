@@ -259,6 +259,11 @@ h1, h2, h3, h4, h5,
   background-color: white;
   height: 500px;
 }
+.media{
+  /* padding: 30px; */
+  background-color: white;
+  height: 500px;
+}
 .card-components {
   display: flex;
   flex-direction: column;
@@ -276,81 +281,7 @@ h1, h2, h3, h4, h5,
   /* margin-top: 40px; */
   font-size: x-large;
 }
-/* 
-.bg-image, .ftco-cover {
-  background-size: cover;
-  background-repeat: no-repeat; 
-}
 
-.ftco-cover {
-  background-position: center center; }
-  .ftco-cover .ftco-heading {
-    font-size: 45px;
-    line-height: 1.34;
-    color: #fff; }
-    @media screen and (max-width: 768px) {
-      .ftco-cover .ftco-heading {
-        font-size: 37px;
-        line-height: 1.3; } }
-  .ftco-cover .ftco-subheading, .ftco-cover p {
-    color: rgba(255, 255, 255, 0.5); }
-  @media screen and (max-width: 768px) {
-    .ftco-cover .btn {
-      width: 100% !important;
-      border: 1px solid red; } }
-  .ftco-cover a {
-    position: relative;
-    color: #fff; }
-    .ftco-cover a:before {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #4586FF;
-      height: 2px;
-      content: " "; }
-  .ftco-cover.overlay {
-    position: relative; }
-    .ftco-cover.overlay:before {
-      content: "";
-      background: rgba(0, 0, 0, 0.6);
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0; }
-  .ftco-cover .ftco-vh-100 {
-    min-height: 700px !important; }
-
-.ftco-slant {
-  position: relative;
-  overflow: hidden; }
-  .ftco-slant:after {
-    width: 100px;
-    height: 200px;
-    left: -10%;
-    background: #f2f2f2;
-    -webkit-transform: rotate(-5deg);
-    -ms-transform: rotate(-5deg);
-    transform: rotate(-5deg);
-    content: "";
-    position: absolute;
-    bottom: -100px; }
-    @media screen and (max-width: 960px) {
-      .ftco-slant:after {
-        bottom: -150px; } }
-    @media screen and (max-width: 768px) {
-      .ftco-slant:after {
-        bottom: -170px; } }
-  .ftco-slant.ftco-slant-white:after {
-    background: #fff; }
-  .ftco-slant.ftco-slant-dark:after {
-    background: #263135; }
-
-.ftco-uppercase {
-  letter-spacing: .1em;
-  font-size: 30px; } */
-/* CSS for Background Video */
 .ftco-cover video {
   object-fit: cover;
   width: 100%;
@@ -635,7 +566,10 @@ textarea {
   flex: 0 0 calc(33.33% - 20px); /* Set each media body to occupy 33.33% width with gap */
   text-align: center; /* Center-align text within media body */
 }
-
+.media{
+  flex: 0 0 calc(33.33% - 20px); /* Set each media body to occupy 33.33% width with gap */
+  text-align: center; /* Center-align text within media body */
+}
 
 
 

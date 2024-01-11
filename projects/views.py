@@ -220,7 +220,21 @@ def moving(request):
 
 #     # Handle other cases or return an empty response
 #     return HttpResponse('')
-
+def start_backendMultiple(request):
+    re = ""
+    re1 = ""
+    if request.method == 'POST':
+        # Check if the button was clicked
+        if 'start_button' in request.POST:
+            # Start the backend script (app.py)
+            # Popen(["python", "app.py"])
+            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+            result = ' '.join(result.splitlines())
+            # re = (nlp(result))
+            re = happy_tt.generate_text(result, args=args)
+            translator = Translator()
+            re1 = translator.translate(re, dest='bn').text
+    return render(request, 'start_backendMultiple.html',{'gestures_output': re, 'gestures_output_bangla': re1})
 # def test(request):
 #     re = ""
 #     ans = ""
@@ -267,6 +281,21 @@ def test(request):
     return render(request, 'test.html', {'gestures_output': re, 'gestures_output_bangla': ans})
 
 # whisper api
+def gestureTest(request):
+    re = ""
+    re1 = ""
+    if request.method == 'POST':
+        # Check if the button was clicked
+        if 'start_button' in request.POST:
+            # Start the backend script (app.py)
+            # Popen(["python", "app.py"])
+            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+            result = ' '.join(result.splitlines())
+            # re = (nlp(result))
+            re = happy_tt.generate_text(result, args=args)
+            translator = Translator()
+            re1 = translator.translate(re, dest='bn').text
+    return render(request, 'gestureTest.html',{'gestures_output': re, 'gestures_output_bangla': re1})
 
 def send_password_reset_email(user):
     token = secrets.token_urlsafe(20)  # Generate a random token
@@ -304,7 +333,9 @@ def password_reset(request, token):
         return redirect('login')
     return render(request, 'password_reset.html') 
 
-
+def features(request):
+    
+    return render(request, 'features.html')
 
 def display_gestures(request):
     # Run your script to get hand gestures

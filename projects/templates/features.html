@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Features</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/features.css">
+</head>
+
+<body>
+    <header>
+        <a href="{% url 'home' %}" style="text-decoration: none; color:white">
+            <h2>Gesture Recognition System</h2>
+        </a>
+        {% comment %} <div class="navbar-brand-container">
+            <a class="navbar-brand" href="{% url 'home' %}">Gesture Recognition System</a>
+        </div> {% endcomment %}
+    </header>
+    <div class="container">
+        <div class="box">
+            <h2>01</h2>
+            <h3>Static gestures</h3>
+            <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+            <a href="{% url 'start_backend' %}"><button  class="simulation-button">Simulation</button></a>
+        </div>
+  
+    <div class="box">
+        <h2>02</h2>
+        <h3>Moving gestures</h3>
+        <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+        <a href="{% url 'start_backendMultiple' %}"><button  class="simulation-button">Simulation</button></a>
+    </div>
+    <div class="box">
+        <h2>03</h2>
+        <h3>Test gestures</h3>
+        <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+        <a href="{% url 'gestureTest' %}"><button  class="simulation-button">Simulation</button></a>
+    </div>
+    <div class="box">
+        <h2>04</h2>
+        <h3>Learn gestures</h3>
+        <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+        <a href="{% url 'gestureTest' %}"><button  class="simulation-button">Simulation</button></a>
+    </div>
+</div>
+
+</body>
+</html>

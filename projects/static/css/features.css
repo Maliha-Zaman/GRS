@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,50,600,700,800,900&display=swap');
+
+*
+{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#666498,#666498 50%, #fff 50%, #fff 100%);
+
+}
+header {
+    /* display: flex; */
+    justify-content: center; /* Aligns the content to the right */
+    padding: 20px 40px; /* Add padding for spacing */
+    background-color: #666498; /* Background color for the header */
+    color: white;
+    
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  */
+}
+
+.navbar-brand-container {
+    font-size: 1.5rem; /* Adjust font size as needed */
+    font-weight: 600; /* Adjust font weight as needed */
+    color: #4C489D; /* Adjust text color as needed */
+}
+.navbar-brand-container a:visited{
+    color: white;
+    text-decoration: none;
+}
+.container {
+    width: 1300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+.box:first-child {
+    margin-left: 100px; 
+   /* Adjust this value based on the amount of space you want */
+}
+
+
+.container .box {
+    position: relative;
+    width: 300px;  /* This calculates the width considering the gap between boxes */
+    background: #fff;
+    padding: 100px 40px 60px;
+    box-shadow: 0 15px 45px rgba(0,0,0,.1);
+    margin-left: 20px;
+    margin-bottom: 40px;
+    
+}
+
+.container .box:before{
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff226d;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s;
+}
+
+.container .box:hover:before{
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition: transform 0.5s;
+}
+.container .box h2{
+    position: absolute;
+    left: 40px;
+    top: 60px;
+    font-size: 4em;
+    font-weight: 800;
+    z-index: 1;
+    opacity: 0.1;
+    transition: 0.5s;
+}
+.container .box:hover h2{
+    opacity: 1;
+    color: #fff;
+    transform: translateY(-40px);
+}
+.container .box h3{
+    position: relative;
+    font-size: 1.5em;
+    z-index: 2;
+    color: #333;
+    transition: 0.5s;
+}
+
+.container .box p{
+    position: relative;
+    z-index: 2;
+    color: #555;
+    transition: 0.5s;
+}
+.container .box:hover h3,
+.container .box:hover p
+{
+    color: #fff;
+}
+.simulation-button {
+    text-decoration: none;
+      padding: 10px 20px;
+      background-color: #7d7ba3;
+      color: #fff;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+      overflow: hidden;
+    border: none;
+    margin-bottom: 20px;
+  }
+  .simulation-button:hover {
+	color: black;
+	background: #fff;
+  border-style: outset;
+  border-color: #7d7ba3;
+  }
