@@ -1,4 +1,5 @@
 <!-- gestures.html -->
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,12 +33,12 @@
                 </div>
             </div>
             <div class="card_right">
-               
-                    
-                        <div class="Simulation">
-                            <video src="../../static/videos/yay.mp4" muted loop autoplay></video>
-                       
-                    </div>
+                <div class="Simulation">
+                <video id="background-video">
+                    <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                   
+                  </video>
+                </div>
                 </div>
             </div>
         </div>
