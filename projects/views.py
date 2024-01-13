@@ -19,10 +19,12 @@ import googletrans
 from happytransformer import HappyTextToText
 from happytransformer import TTSettings
 from googletrans import Translator
+from django.http import HttpResponse
 nlp = pipeline("k2t")
 
 # keywords = ['Apple', 'Iphone', 'Samsung']
 # print(nlp(keywords))
+
 args = TTSettings(num_beams=5, min_length=1)
 happy_tt = HappyTextToText("T5", "vennify/t5-base-grammar-correction")
 def is_valid_password(password):
@@ -183,10 +185,43 @@ def start_backend(request):
             result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
             result = ' '.join(result.splitlines())
             # re = (nlp(result))
-            re = happy_tt.generate_text(result, args=args)
+            re = happy_tt.generate_text(result, args=args).text
             translator = Translator()
             re1 = translator.translate(re, dest='bn').text
     return render(request, 'start_backend.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+
+def moving(request):
+    re = ""
+    re1 = ""
+    if request.method == 'POST':
+        if 'start_button' in request.POST:
+            result = subprocess.check_output(['python', 'moving.py'], universal_newlines=True)
+
+    return render(request, 'moving.html')
+
+
+
+
+# def audio(request):
+#     if request.method == 'POST':
+#         # Check if the button was clicked
+#         if 'audio' in request.POST:
+#             # Get the text from the 're' variable
+#             text_to_convert = request.POST.get('re', '')
+            
+#             # Perform the audio conversion (replace this with your actual audio generation logic)
+#             # For example, using a text-to-speech tool like gTTS
+#             # Install gTTS using: pip install gtts
+#             subprocess.run(['gtts-cli', text_to_convert, '--output', 'output_audio.mp3'])
+
+#             # Return the generated audio file as a response
+#             with open('output_audio.mp3', 'rb') as audio_file:
+#                 response = HttpResponse(audio_file.read(), content_type='audio/mpeg')
+#                 response['Content-Disposition'] = 'attachment; filename="output_audio.mp3"'
+#                 return response
+
+#     # Handle other cases or return an empty response
+#     return HttpResponse('')
 def start_backendMultiple(request):
     re = ""
     re1 = ""
@@ -225,13 +260,13 @@ def start_backendMultiple(request):
 def test(request):
     re = ""
     ans = ""
-    text = request.POST.get('text', '')  # Ensure text is not None
+    text = request.POST.get('text', '').strip()  # Ensure text is not None
     if request.method == 'POST':
         # Check if the button was clicked
         if 'test' in request.POST:
             try:
                 re = subprocess.check_output(['python', 'test.py'], universal_newlines=True)
-                re_lines = re.strip().splitlines()
+                re_lines = re.strip()
                 if re_lines:
                     re = re_lines[-1]  # Extract the last line
                     re = re.strip()
@@ -304,9 +339,9 @@ def features(request):
     
     return render(request, 'features.html')
 
-def display_gestures(request):
+def gestures(request):
     # Run your script to get hand gestures
-    result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+    # result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
     
     # Pass the result to the template
-    return render(request, 'gestures.html', {'gestures_output': result})
+    return render(request, 'gestures.html')
