@@ -13,12 +13,12 @@ body {
 	display: -ms-flexbox;
 	display: flex;
 	max-width: 770px;
-	background: #00C9FF; 
-	background: -webkit-linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116));
+	background:  #6A679E; 
+	/* background: -webkit-linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116));
 	background: -webkit-gradient(linear, left top, right top, from(rgba(60,132,206,1)), to(rgb(123, 21, 116)));
 	background: -webkit-linear-gradient(left, rgba(60,132,206,1), rgb(123, 21, 116));
 	background: -o-linear-gradient(left, rgba(60,132,206,1), rgb(123, 21, 116));
-	background: linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116)); 
+	background: linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116));  */
 /* 
 	-webkit-box-shadow: 0 0 40px rgba(0,0,0,0.3); 
 	        box-shadow: 0 0 40px rgba(0,0,0,0.3); */
@@ -196,6 +196,89 @@ button:hover {
 				-webkit-transform: rotate(359deg);
 		}
 }
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+	padding-top: 10.25%; 
+}
+
+#background-video {
+    width: 100%;
+    height: 100%;
+	object-fit: cover;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+.screen__content {
+	display: flex;
+	flex-wrap: wrap;    
+	justify-content: space-around;
+}
+.footer{
+	padding: 7em 0 7em 0; 
+	background: #7d7ba3;
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	margin: -20px;
+}
+
+.made-by{
+	font-size: 14px;
+	  font-weight: bold;
+	  letter-spacing: .05em;
+	  text-transform: uppercase;
+	  color: rgba(255, 255, 255, 0.764);
+  }
+  
+  .name {
+	flex: 1; 
+	display: flex;
+	align-items: center;
+	font-size: xx-large;
+	color: rgba(255, 255, 255, 0.764);
+  }
+  .ftco-footer-widget {
+	flex: 1; 
+	display: flex;
+	justify-content: flex-end; 
+	align-items: flex-end; 
+  }
+
+  .containers {
+	padding-right: 100px;
+	padding-left: 70px;
+	margin: 20px;
+	text-align: center;
+
+  }
+  .row {
+	display: flex;
+	justify-content: space-between; 
+	gap: 20px; 
+  }
+  .row {
+	text-align: center;
+  }  
+  .list-unstyled {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+  }
+  .list-unstyled li {
+	margin-bottom: 8px;
+	color: #fff;
+	font-size: 16px;
+  }
 .video-container {
     position: relative;
     width: 100%;

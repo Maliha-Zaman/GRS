@@ -1,60 +1,161 @@
-<!-- gestures.html -->
 {% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hand Gestures</title>
+    <title>Simulation</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/gestures.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
 </head>
+<header>
+    <div class="title">    
+        
+            <a href="{% url 'home' %}" style="text-decoration: none;">
+                Gesture Recognition System
+            </a>
+            <ul class="navbar-nav ml-auto">
+              {% if user %}
+                <div class="header">
+                    <!-- <p> -->
+                      <i class="login__icon fas fa-user"></i> {{ user.username }}
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                    <!-- </p> -->
+                </div>
+             
+              {% endif %}
+             
+            </ul>
+        
+    </div>
+    
+  </header>
 <body>
-    <h1>Hand Gestures</h1>
-    <div class="wrapper">
-        <div class="main_card">
-            <div class="card_left">
-                <div class="card_datails">
-                    <h1>Stop</h1>
-                   
-                    <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
-                    
-                <div class="social-btn">
+  <div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+ </div>
+    <!-- <h1>Click to Start Backend</h1> -->
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+              <div class="login__field">
+                <p class="text">Test</p>
+              </div>
+              <div class="wrapper">
+                <div class="main_card">
+                    <div class="card_left">
+                        <div class="card_datails">
+                            <!-- <h1>Stop</h1> -->
+                            <div class="card_cat">
+                                <!-- <p class="PG">PG - 13</p> -->
+                                
+                            </div>
+                            <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                            
+                        <div class="social-btn">
+        
+                            <!-- GET-->
+                            <button>
+                                <i class="fas fa-download"></i> DOWNLOAD
+                            </button>
+                            <!--BOOKMARK-->
+                        </div>	
+                        </div>
+                    </div>
+                    <div class="card_right">
+                        <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                            <video id="background-video">
+                                <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                            </video>
+                            <div class="overlay-text">Hover to play</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+              <!-- <form method="post" >
+                <div class="divide">
+                  <div class="vidButton">
+                    {% csrf_token %} 
 
-                    <!-- GET-->
-                    <button>
-                        <i class="fas fa-download"></i> DOWNLOAD
+                    <div class="Simulation">
+                        <video src="../static/videos/simulation.mp4" muted loop autoplay></video>
+                    </div>  
+                    <div class="text">
+                        <select name="text" id="text" class="text" required="">
+                          <option value="" selected disabled>Select Text</option>
+                          <option value="Option 1">I</option>
+                          <option value="Option 2">you</option>
+                          <option value="Option 3">goodluck</option>
+                        </select>
+                    </div>
+                    <button type="submit" name="start_button" class="submit" action="{% url 'start_backend' %}">
+                      <div class="svg-wrapper-1">
+                        <div class="svg-wrapper">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="none" d="M0 0h24v24H0z"></path>
+                            <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <span class="button__text">START</span>
                     </button>
-                    <!--BOOKMARK-->
-                    <button>
-                        <i class="fas fa-star"></i>
-                    </button>
-                </div>	
+                  </div>
+                    <div class="labelbox">
+                      <div class="para">
+                        <p>You can simulate your moving gestures to make sentences. Instructions:</p>
+                        <p>You can use the simulation to see whether your moving gestures are correct or not. This is for practicing your gestures in order to improve your communication skills.</p>
+                      </div>
+                      <div class="output">
+                        <p>Output:</p>
+                        <p>{{ gestures_output }}</p>
+                        <p>{{ gestures_output_bangla }}</p>
+                      </div>
+                    </div>
+                  </div> -->
+                  </div>
+                </form>
+
+    </div>
+    </div>
+
+        <footer class="footer">
+            <div class="containers">
+              <div class="row">
+                <div class="name">
+                  <p>Gesture Recognition System</p>
                 </div>
+                <div class="col-md">
+                  <div class="ftco-footer-widget mb-4">
+                    <ul class="list-unstyled">
+                      <li><h2 class="made-by">Made by:</h2></li>
+                      <li>Mohammad Ittehad Rahman Sami(S)</li>
+                      <li>Maliha Zaman</li>
+                      <li>Tamim Afnan</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>  
             </div>
-            <div class="card_right">
-                <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
-                    <video id="background-video">
-                        <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
-                    </video>
-                    <div class="overlay-text">Hover to play</div>
-                </div>
-                
-                
-                </div>
-            </div>
-        </div>
-        <script>// Get the video element
+          </footer>
+          <script>// Get the video element
             var video = document.getElementById("background-video");
-            
+
             // Function to play the video
             function playVideo() {
                 video.play();  // Play the video
                 document.querySelector(".overlay-text").style.display = "none"; // Hide the overlay text
             }
-            
+
             // Function to pause the video
             function pauseVideo() {
                 video.pause(); // Pause the video
                 document.querySelector(".overlay-text").style.display = "block"; // Show the overlay text
             }
             </script>
-</body>
+    </body>
 </html>
