@@ -14,6 +14,8 @@ body {
 	display: flex;
 	max-width: 770px;
 	background:  #6A679E; 
+	border-radius: 10px;
+
 	/* background: -webkit-linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116));
 	background: -webkit-gradient(linear, left top, right top, from(rgba(60,132,206,1)), to(rgb(123, 21, 116)));
 	background: -webkit-linear-gradient(left, rgba(60,132,206,1), rgb(123, 21, 116));
@@ -32,16 +34,18 @@ body {
     -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.5); 
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
     transform: scale(1.05); /* Slight zoom-in effect */
+
 }
 
 .card_left {
-	width: 90%;
+	width: 100%;
+	padding: 20px;
 }
 
 .card_datails {
 	width: 90%;
 	padding: 30px;
-	margin-top: -25px;
+	/* margin-top: -25px; */
 }
 .card_datails  h1 {
 	font-size: 30px;
@@ -49,7 +53,9 @@ body {
 
 .card_right {
 	border-radius: 2px;
-	
+	padding: 20px;
+	padding-right: 40px;
+	margin-right: 20px;
 }
 
 .card_cat {
@@ -222,6 +228,7 @@ button:hover {
 	display: flex;
 	flex-wrap: wrap;    
 	justify-content: space-around;
+	background-color: #f2f2f2;
 }
 .footer{
 	padding: 7em 0 7em 0; 
@@ -234,48 +241,73 @@ button:hover {
 
 .made-by{
 	font-size: 14px;
-	  font-weight: bold;
-	  letter-spacing: .05em;
-	  text-transform: uppercase;
-	  color: rgba(255, 255, 255, 0.764);
-  }
+	font-weight: bold;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.764);
+}
   
-  .name {
+.name {
 	flex: 1; 
 	display: flex;
 	align-items: center;
 	font-size: xx-large;
 	color: rgba(255, 255, 255, 0.764);
-  }
-  .ftco-footer-widget {
+}
+.ftco-footer-widget {
 	flex: 1; 
 	display: flex;
 	justify-content: flex-end; 
 	align-items: flex-end; 
-  }
+}
 
-  .containers {
+.containers {
 	padding-right: 100px;
 	padding-left: 70px;
 	margin: 20px;
 	text-align: center;
 
-  }
-  .row {
+}
+.row {
 	display: flex;
 	justify-content: space-between; 
 	gap: 20px; 
-  }
-  .row {
+}
+.row {
 	text-align: center;
-  }  
-  .list-unstyled {
+}  
+.list-unstyled {
 	list-style: none;
 	padding: 0;
 	margin: 0;
-  }
-  .list-unstyled li {
+}
+.list-unstyled li {
 	margin-bottom: 8px;
 	color: #fff;
 	font-size: 16px;
-  }
+}
+  
+.title {
+    font-size: 1.55rem;
+    color: #6A679E; 
+    text-decoration: none;
+	letter-spacing: .1em;
+	margin-left: 100px;
+	margin-top: 50px;
+
+	/* margin-right: 200px; */
+}
+.title :visited{
+    color: #6A679E;
+}
+header {
+    background-color: transparent;
+    color: #6A679E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   	font-family: "Raleway", sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
