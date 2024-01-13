@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+ 
 ]
 
 ROOT_URLCONF = 'GRS.urls'
@@ -137,3 +138,9 @@ EMAIL_USE_TLS = True  # Set to False if you're using SSL
 EMAIL_USE_SSL = False  # Set to True if you're using SSL
 EMAIL_HOST_USER = 'grs334669@gmail.com'
 EMAIL_HOST_PASSWORD = 'xmek lgbn apvj pbiy'
+LOGIN_URL = 'login'  # Assuming 'login' is the name of your login view
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 1209600 
+# Whether to save the session data on every request.
+SESSION_SAVE_EVERY_REQUEST = True
+

@@ -13,6 +13,21 @@
             <a href="{% url 'home' %}" style="text-decoration: none;">
                 <h2>Gesture Recognition System</h2>
             </a>
+            <ul class="navbar-nav ml-auto">
+            {% if user %}
+              <div class="header">
+                  <!-- <p> -->
+                    <i class="login__icon fas fa-user"></i> {{ user.username }}
+                  <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="logout-btn">Logout</button>
+                  </form>
+                  <!-- </p> -->
+              </div>
+            
+            {% endif %}
+           
+          </ul>
         
     </div>
     <!-- {% if user %}

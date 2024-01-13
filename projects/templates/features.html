@@ -11,6 +11,25 @@
         <a href="{% url 'home' %}" style="text-decoration: none; color:white">
             <h2>Gesture Recognition System</h2>
         </a>
+        <ul class="navbar-nav ml-auto">
+            {% if user %}
+              <div class="header">
+                  <!-- <p> -->
+                    <i class="login__icon fas fa-user"></i> {{ user.username }}
+                  <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="logout-btn">Logout</button>
+                  </form>
+                  <!-- </p> -->
+              </div>
+            {% else %}
+                <div class="header-buttons">
+                  <a href="{% url 'login' %}" class="login-button">Login</a>
+                  <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
+                </div>
+            {% endif %}
+           
+          </ul>
         {% comment %} <div class="navbar-brand-container">
             <a class="navbar-brand" href="{% url 'home' %}">Gesture Recognition System</a>
         </div> {% endcomment %}
