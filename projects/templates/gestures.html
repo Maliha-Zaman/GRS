@@ -13,10 +13,7 @@
             <div class="card_left">
                 <div class="card_datails">
                     <h1>Stop</h1>
-                    <div class="card_cat">
-                        <p class="PG">PG - 13</p>
-                        
-                    </div>
+                   
                     <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
                     
                 <div class="social-btn">
@@ -33,14 +30,31 @@
                 </div>
             </div>
             <div class="card_right">
-                <div class="Simulation">
-                <video id="background-video">
-                    <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
-                   
-                  </video>
+                <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                    <video id="background-video">
+                        <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="overlay-text">Hover to play</div>
                 </div>
+                
+                
                 </div>
             </div>
         </div>
+        <script>// Get the video element
+            var video = document.getElementById("background-video");
+            
+            // Function to play the video
+            function playVideo() {
+                video.play();  // Play the video
+                document.querySelector(".overlay-text").style.display = "none"; // Hide the overlay text
+            }
+            
+            // Function to pause the video
+            function pauseVideo() {
+                video.pause(); // Pause the video
+                document.querySelector(".overlay-text").style.display = "block"; // Show the overlay text
+            }
+            </script>
 </body>
 </html>
