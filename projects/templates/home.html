@@ -99,7 +99,7 @@
             </div>
         
             
-            <div class="media-body" style="margin-top: 280px; background-color: #a19df5; color: #fff;">
+            {% comment %} <div class="media-body" style="margin-top: 280px; background-color: #a19df5; color: #fff;">
                 <div class="mt-0">
                     <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Simulation</h3>
                 </div>
@@ -108,9 +108,9 @@
                 
                     <a href="{% url 'start_backend' %}"><button  class="simulation-button">Simulation</button></a>
                 </div>
-            </div>
+            </div> {% endcomment %}
             
-            <div class="media-body" style="margin-top: -270px;">
+            <div class="media-body" style="margin-top: 5px;">
                 <div class="mt-0">
                     <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Okay</h3>
                 </div>
@@ -119,7 +119,7 @@
                 </div>
             </div>
             
-            <div class="media-body" style="margin-top: 30px; margin-right: 390px; background-color: #a19df5; color: #fff;">
+            {% comment %} <div class="media-body" style="margin-top: 30px; margin-right: 390px; background-color: #a19df5; color: #fff;">
               <div class="mt-0">
                   <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Simulation</h3>
               </div>
@@ -128,8 +128,8 @@
               
                   <a href="{% url 'start_backendMultiple' %}"><button  class="simulation-button">Simulation</button></a>
               </div>
-          </div>
-          <div class="media-body" style="margin-top: -520px; margin-left: 780px; background-color: #a19df5; color: #fff;">
+          </div> {% endcomment %}
+          {% comment %} <div class="media-body" style="margin-top: -520px; margin-left: 780px; background-color: #a19df5; color: #fff;">
             <div class="mt-0">
                 <h3 style="margin-top: 80px; text-align: center; font-family: 'Raleway', sans-serif;">Simulation</h3>
             </div>
@@ -138,8 +138,21 @@
             
                 <a href="{% url 'gestureTest' %}"><button  class="simulation-button">Simulation</button></a>
             </div>
-        </div>
-          
+        </div>  {% endcomment %}
+        <div class="heading">
+          <h2 class="text-uppercase ftco-uppercase" style="margin-left: 20px">Features</h2>
+          <div class="row justify-content-center" style="margin-left: 20px">
+              {% comment %} <div class="col-md-7">
+                  <p class="lead">Real-time gesture recognition using 21 points of your hand to detect your expressions in the form of words.</p>
+              </div> {% endcomment %}
+            
+            <div class="card-component">
+                <p class="mb-5">Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
+            
+                <a href="{% url 'features' %}"><button  class="simulation-button">Features</button></a>
+            </div>
+          </div>
+      </div>
         </div>
       </div>
          

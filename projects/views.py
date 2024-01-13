@@ -24,6 +24,7 @@ nlp = pipeline("k2t")
 
 # keywords = ['Apple', 'Iphone', 'Samsung']
 # print(nlp(keywords))
+
 args = TTSettings(num_beams=5, min_length=1)
 happy_tt = HappyTextToText("T5", "vennify/t5-base-grammar-correction")
 def is_valid_password(password):
@@ -188,6 +189,7 @@ def start_backend(request):
             translator = Translator()
             re1 = translator.translate(re, dest='bn').text
     return render(request, 'start_backend.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+
 def moving(request):
     re = ""
     re1 = ""
@@ -337,9 +339,9 @@ def features(request):
     
     return render(request, 'features.html')
 
-def display_gestures(request):
+def gestures(request):
     # Run your script to get hand gestures
-    result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+    # result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
     
     # Pass the result to the template
-    return render(request, 'gestures.html', {'gestures_output': result})
+    return render(request, 'gestures.html')
