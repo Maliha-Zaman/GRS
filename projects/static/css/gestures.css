@@ -14,13 +14,24 @@ body {
 	display: flex;
 	max-width: 770px;
 	background: #00C9FF; 
-	background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);
-	background: -webkit-gradient(linear, left top, right top, from(#92FE9D), to(#00C9FF));
-	background: -webkit-linear-gradient(left, #92FE9D, #00C9FF);
-	background: -o-linear-gradient(left, #92FE9D, #00C9FF);
-	background: linear-gradient(to right, #92FE9D, #00C9FF); 
+	background: -webkit-linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116));
+	background: -webkit-gradient(linear, left top, right top, from(rgba(60,132,206,1)), to(rgb(123, 21, 116)));
+	background: -webkit-linear-gradient(left, rgba(60,132,206,1), rgb(123, 21, 116));
+	background: -o-linear-gradient(left, rgba(60,132,206,1), rgb(123, 21, 116));
+	background: linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116)); 
+/* 
 	-webkit-box-shadow: 0 0 40px rgba(0,0,0,0.3); 
-	        box-shadow: 0 0 40px rgba(0,0,0,0.3);
+	        box-shadow: 0 0 40px rgba(0,0,0,0.3); */
+	box-shadow: none;
+
+			transition: all 0.3s ease-in-out;
+			border: 2px solid rgba(255, 255, 255, 0.3); 
+}
+.main_card:hover {
+	border-color: rgba(255, 255, 255, 0.7); /* Change border color on hover */
+    -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.5); 
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    transform: scale(1.05); /* Slight zoom-in effect */
 }
 
 .card_left {
@@ -38,7 +49,7 @@ body {
 
 .card_right {
 	border-radius: 2px;
-	height: 390px;
+	
 }
 
 .card_cat {
@@ -85,7 +96,7 @@ button {
 	font-size: 12px;
 	margin-top: 30px;
 	margin-left: 10px;
-	background: #92FE9D;
+	background: #94c0f3;
 	border-radius: 12px;
 	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
 	        box-shadow: 0 0 20px rgba(0,0,0,0.2);
@@ -146,12 +157,19 @@ button:hover {
 }
 .Simulation {
 	width: 100%;
+	height: 390px;
 	position: relative;
   }
   
   video {
 	width: 100%;
-	height: auto;
+	height: 100%;
+	margin-left: 0px;
+	display: block; /* Remove any inline whitespace */
+    object-fit: cover; /* Cover the entire container */
+    border: 1px solid #ffffff; /* Add a white border around the video */
+    border-radius: 8px; /* Add some border-radius for rounded corners */
+	box-shadow: #255;
   }
 
 
@@ -177,4 +195,26 @@ button:hover {
 		to {
 				-webkit-transform: rotate(359deg);
 		}
+}
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+	padding-top: 10.25%; 
+}
+
+#background-video {
+    width: 100%;
+    height: 100%;
+	object-fit: cover;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
 }
