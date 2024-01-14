@@ -75,19 +75,20 @@ def main():
     point_history_classifier = PointHistoryClassifier()
 
     # Read labels ###########################################################
+    # Read labels ###########################################################
     with open('model/keypoint_classifier/keypoint_classifier_label.csv',
               encoding='utf-8-sig') as f:
         keypoint_classifier_labels = csv.reader(f)
         keypoint_classifier_labels = [
-            row[0] for row in keypoint_classifier_labels
-        ]
+    row[0] for row in keypoint_classifier_labels if len(row) > 0
+]
     with open(
             'model/point_history_classifier/point_history_classifier_label.csv',
             encoding='utf-8-sig') as f:
         point_history_classifier_labels = csv.reader(f)
         point_history_classifier_labels = [
-            row[0] for row in point_history_classifier_labels
-        ]
+    row[0] for row in point_history_classifier_labels if len(row) > 0
+]
 
     # FPS Measurement ########################################################
     cvFpsCalc = CvFpsCalc(buffer_len=10)
@@ -145,16 +146,27 @@ def main():
 
                 # Hand sign classification
                 hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
-                if hand_sign_id == 2:  # Point gesture
-                    point_history.append(landmark_list[8])
-                elif hand_sign_id == 0:  # Point gesture
-                    point_history.append(landmark_list[8])
-                    point_history.append(landmark_list[12])
-                    point_history.append(landmark_list[16])
-                    point_history.append(landmark_list[20])
-                    point_history.append(landmark_list[4])
-                else:
-                    point_history.append([0, 0])
+                point_history.append([0, 0])
+                # # if hand_sign_id == 2:  # Point gesture
+                # #     point_history.append(landmark_list[8])
+                # # elif hand_sign_id == 0:  # Open gesture
+                # #     point_history.append(landmark_list[8])
+                # #     point_history.append(landmark_list[12])
+                # #     point_history.append(landmark_list[16])
+                # #     point_history.append(landmark_list[20])
+                # #     point_history.append(landmark_list[4])
+                # # elif hand_sign_id == 5:  # Goodluck gesture
+                # #     point_history.append(landmark_list[8])
+                # #     point_history.append(landmark_list[12])
+                # #     point_history.append(landmark_list[4])   
+                # # elif hand_sign_id == 1:  # Close gesture
+                # #     point_history.append(landmark_list[4])
+                # #     point_history.append(landmark_list[5])
+                # #     point_history.append(landmark_list[9])
+                # #     point_history.append(landmark_list[13])
+                # #     point_history.append(landmark_list[17])    
+                # # else:
+                #     point_history.append([0, 0])
 
                 # Finger gesture classification
                 finger_gesture_id = 0
@@ -332,12 +344,12 @@ def logging_csv(number, mode, landmark_list, point_history_list):
         csv_path = 'model/keypoint_classifier/keypoint.csv'
         with open(csv_path, 'a', newline="") as f:
             writer = csv.writer(f)
-            writer.writerow([number, *landmark_list])
+            writer.writerow([number+10, *landmark_list])
     if mode == 2 and (0 <= number <= 9):
         csv_path = 'model/point_history_classifier/point_history.csv'
         with open(csv_path, 'a', newline="") as f:
             writer = csv.writer(f)
-            writer.writerow([number+10, *point_history_list])
+            writer.writerow([number, *point_history_list])
     return
 
 #Visualize landmarks and key points on an image by drawing connecting lines and circles at specific locations on the hand
@@ -549,12 +561,12 @@ def draw_info_text(image, brect, handedness, hand_sign_text,
     cv.putText(image, info_text, (brect[0] + 5, brect[1] - 4),
                cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
 
-    if finger_gesture_text != "":
-        cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
-                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 4, cv.LINE_AA)
-        cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
-                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2,
-                   cv.LINE_AA)
+    # if finger_gesture_text != "":
+    #     cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
+    #                cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 4, cv.LINE_AA)
+    #     cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
+    #                cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2,
+    #                cv.LINE_AA)
 
     return image
 

@@ -9,7 +9,7 @@ RANDOM_SEED = 42
 dataset = 'model/point_history_classifier/point_history.csv'
 model_save_path = 'model/point_history_classifier/point_history_classifier.hdf5'
 
-NUM_CLASSES = 11
+NUM_CLASSES = 10
 
 TIME_STEPS = 16
 DIMENSION = 2
