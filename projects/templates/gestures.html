@@ -40,19 +40,71 @@
  </div>
     <!-- <h1>Click to Start Backend</h1> -->
     <div class="container">
+      <div class="cover">
+        <input type="text" id="gesture-search" placeholder="Search for gestures...">
+        <div class="search"></div>
+      </div>
+      {% comment %} <select id="category-filter" onchange="filterGestures()">
+        <option value="all">All Categories</option>
+        <option value="moving">Moving</option>
+        <option value="static">Static</option>
+       
+    </select> {% endcomment %}
+   
         <div class="screen">
+          
             <div class="screen__content">
+              <form id="app-cover">
+                <div id="select-box">
+                    <input type="checkbox" id="options-view-button">
+                    <div id="select-button" class="brd">
+                        <div id="selected-value">
+                            <span>Select a Category</span>
+                        </div>
+                       <div id="chevrons">
+                            <i class="fas fa-chevron-up"></i>
+                            <i class="fas fa-chevron-down"></i>
+                        </div> 
+                    </div>
+                    <div id="options">
+                        <div class="option">
+                            <input class="s-c top" type="radio" name="platform" value="all" checked>
+                            <input class="s-c bottom" type="radio" name="platform" value="all" checked>
+                            <span class="label">All Categories</span>
+                            <span class="opt-val">All Categories</span>
+                        </div>
+                        <div class="option">
+                            <input class="s-c top" type="radio" name="platform" value="static">
+                            <input class="s-c bottom" type="radio" name="platform" value="static">
+                            <span class="label">static</span>
+                            <span class="opt-val">static</span>
+                        </div>
+                        <div class="option">
+                          <input class="s-c top" type="radio" name="platform" value="moving">
+                          <input class="s-c bottom" type="radio" name="platform" value="moving">
+                          <span class="label">moving</span>
+                          <span class="opt-val">moving</span>
+                      </div>
+                        <!-- Add more options for each category as needed -->
+            
+                        <div id="option-bg"></div>
+                    </div>
+                </div>
+            </form>
+            
+            
               <!-- <div class="login__field">
                 <p class="text">Test</p>
               </div> -->
               <div class="wrapper">
-                <div class="main_card">
+                <div class="main_card" data-category="static">
                     <div class="card_left">
                         <div class="card_datails">
                             <!-- <h1>Stop</h1> -->
                             <div class="card_cat">
                                 <!-- <p class="PG">PG - 13</p> -->
-                                <h2>Hello</h2>
+                                <h2>OPEN</h2>
+                              
                                 
                             </div>
                             <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
@@ -77,14 +129,15 @@
                     </div>
                 </div>
                 </div>
-                <div class="wrapper">
-                    <div class="main_card">
+              <div class="wrapper">
+                    <div class="main_card" data-category="static">
                         <div class="card_left">
                             <div class="card_datails">
                                 <!-- <h1>Stop</h1> -->
                                 <div class="card_cat">
                                     <!-- <p class="PG">PG - 13</p> -->
-                                    <h2>Hello</h2>
+                                    
+                                    <h2>CLOSE</h2>
                                     
                                 </div>
                                 <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
@@ -110,13 +163,13 @@
                     </div>
                     </div>
                     <div class="wrapper">
-                        <div class="main_card">
+                        <div class="main_card" data-category="static">
                             <div class="card_left">
                                 <div class="card_datails">
                                     <!-- <h1>Stop</h1> -->
-                                    <div class="card_cat">
+                                    <div class="card_cat" >
                                         <!-- <p class="PG">PG - 13</p> -->
-                                        <h2>Hello</h2>
+                                        <h2>POINTER</h2>
                                         
                                     </div>
                                     <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
@@ -141,6 +194,807 @@
                             </div>
                         </div>
                         </div>
+                        <div class="wrapper">
+                          <div class="main_card" data-category="static">
+                              <div class="card_left">
+                                  <div class="card_datails">
+                                      <!-- <h1>Stop</h1> -->
+                                      <div class="card_cat">
+                                          <!-- <p class="PG">PG - 13</p> -->
+                                          <h2>OK</h2>
+                                          
+                                      </div>
+                                      <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                      
+                                  <div class="social-btn">
+                  
+                                      <!-- GET-->
+                                      <button>
+                                          <i class="fas fa-download"></i> DOWNLOAD
+                                      </button>
+                                      <!--BOOKMARK-->
+                                  </div>	
+                                  </div>
+                              </div>
+                              <div class="card_right">
+                                  <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                      <video id="background-video">
+                                          <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                      </video>
+                                      <div class="overlay-text">Hover to play</div>
+                                  </div>
+                              </div>
+                          </div>
+                          </div>
+                          <div class="wrapper">
+                            <div class="main_card" data-category="static">
+                                <div class="card_left">
+                                    <div class="card_datails">
+                                        <!-- <h1>Stop</h1> -->
+                                        <div class="card_cat">
+                                            <!-- <p class="PG">PG - 13</p> -->
+                                            <h2>LOVE</h2>
+                                            
+                                        </div>
+                                        <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                        
+                                    <div class="social-btn">
+                    
+                                        <!-- GET-->
+                                        <button>
+                                            <i class="fas fa-download"></i> DOWNLOAD
+                                        </button>
+                                        <!--BOOKMARK-->
+                                    </div>	
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                        <video id="background-video">
+                                            <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                        </video>
+                                        <div class="overlay-text">Hover to play</div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="wrapper">
+                              <div class="main_card" data-category="static">
+                                  <div class="card_left">
+                                      <div class="card_datails">
+                                          <!-- <h1>Stop</h1> -->
+                                          <div class="card_cat">
+                                              <!-- <p class="PG">PG - 13</p> -->
+                                              <h2>GOOD LUCK</h2>
+                                              
+                                          </div>
+                                          <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                          
+                                      <div class="social-btn">
+                      
+                                          <!-- GET-->
+                                          <button>
+                                              <i class="fas fa-download"></i> DOWNLOAD
+                                          </button>
+                                          <!--BOOKMARK-->
+                                      </div>	
+                                      </div>
+                                  </div>
+                                  <div class="card_right">
+                                      <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                          <video id="background-video">
+                                              <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                          </video>
+                                          <div class="overlay-text">Hover to play</div>
+                                      </div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="wrapper">
+                                <div class="main_card" data-category="static">
+                                    <div class="card_left">
+                                        <div class="card_datails">
+                                            <!-- <h1>Stop</h1> -->
+                                            <div class="card_cat">
+                                                <!-- <p class="PG">PG - 13</p> -->
+                                                <h2>THANK YOU</h2>
+                                                
+                                            </div>
+                                            <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                            
+                                        <div class="social-btn">
+                        
+                                            <!-- GET-->
+                                            <button>
+                                                <i class="fas fa-download"></i> DOWNLOAD
+                                            </button>
+                                            <!--BOOKMARK-->
+                                        </div>	
+                                        </div>
+                                    </div>
+                                    <div class="card_right">
+                                        <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                            <video id="background-video">
+                                                <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                            </video>
+                                            <div class="overlay-text">Hover to play</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="wrapper">
+                                  <div class="main_card" data-category="static">
+                                      <div class="card_left">
+                                          <div class="card_datails">
+                                              <!-- <h1>Stop</h1> -->
+                                              <div class="card_cat">
+                                                  <!-- <p class="PG">PG - 13</p> -->
+                                                  <h2>AGREE</h2>
+                                                  
+                                              </div>
+                                              <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                              
+                                          <div class="social-btn">
+                          
+                                              <!-- GET-->
+                                              <button>
+                                                  <i class="fas fa-download"></i> DOWNLOAD
+                                              </button>
+                                              <!--BOOKMARK-->
+                                          </div>	
+                                          </div>
+                                      </div>
+                                      <div class="card_right">
+                                          <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                              <video id="background-video">
+                                                  <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                              </video>
+                                              <div class="overlay-text">Hover to play</div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  </div>
+                                  <div class="wrapper">
+                                    <div class="main_card" data-category="static">
+                                        <div class="card_left">
+                                            <div class="card_datails">
+                                                <!-- <h1>Stop</h1> -->
+                                                <div class="card_cat">
+                                                    <!-- <p class="PG">PG - 13</p> -->
+                                                    <h2>DISAGREE</h2>
+                                                    
+                                                </div>
+                                                <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                
+                                            <div class="social-btn">
+                            
+                                                <!-- GET-->
+                                                <button>
+                                                    <i class="fas fa-download"></i> DOWNLOAD
+                                                </button>
+                                                <!--BOOKMARK-->
+                                            </div>	
+                                            </div>
+                                        </div>
+                                        <div class="card_right">
+                                            <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                <video id="background-video">
+                                                    <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                </video>
+                                                <div class="overlay-text">Hover to play</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="wrapper">
+                                      <div class="main_card" data-category="static">
+                                          <div class="card_left">
+                                              <div class="card_datails">
+                                                  <!-- <h1>Stop</h1> -->
+                                                  <div class="card_cat">
+                                                      <!-- <p class="PG">PG - 13</p> -->
+                                                      <h2>PEACE</h2>
+                                                      
+                                                  </div>
+                                                  <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                  
+                                              <div class="social-btn">
+                              
+                                                  <!-- GET-->
+                                                  <button>
+                                                      <i class="fas fa-download"></i> DOWNLOAD
+                                                  </button>
+                                                  <!--BOOKMARK-->
+                                              </div>	
+                                              </div>
+                                          </div>
+                                          <div class="card_right">
+                                              <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                  <video id="background-video">
+                                                      <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                  </video>
+                                                  <div class="overlay-text">Hover to play</div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      </div>
+                                      <div class="wrapper">
+                                        <div class="main_card" data-category="static">
+                                            <div class="card_left">
+                                                <div class="card_datails">
+                                                    <!-- <h1>Stop</h1> -->
+                                                    <div class="card_cat">
+                                                        <!-- <p class="PG">PG - 13</p> -->
+                                                        <h2>BLESS</h2>
+                                                        
+                                                    </div>
+                                                    <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                    
+                                                <div class="social-btn">
+                                
+                                                    <!-- GET-->
+                                                    <button>
+                                                        <i class="fas fa-download"></i> DOWNLOAD
+                                                    </button>
+                                                    <!--BOOKMARK-->
+                                                </div>	
+                                                </div>
+                                            </div>
+                                            <div class="card_right">
+                                                <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                    <video id="background-video">
+                                                        <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                    </video>
+                                                    <div class="overlay-text">Hover to play</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="wrapper">
+                                          <div class="main_card" data-category="static">
+                                              <div class="card_left">
+                                                  <div class="card_datails">
+                                                      <!-- <h1>Stop</h1> -->
+                                                      <div class="card_cat">
+                                                          <!-- <p class="PG">PG - 13</p> -->
+                                                          <h2>WELCOME</h2>
+                                                          
+                                                      </div>
+                                                      <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                      
+                                                  <div class="social-btn">
+                                  
+                                                      <!-- GET-->
+                                                      <button>
+                                                          <i class="fas fa-download"></i> DOWNLOAD
+                                                      </button>
+                                                      <!--BOOKMARK-->
+                                                  </div>	
+                                                  </div>
+                                              </div>
+                                              <div class="card_right">
+                                                  <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                      <video id="background-video">
+                                                          <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                      </video>
+                                                      <div class="overlay-text">Hover to play</div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          </div>
+                                          <div class="wrapper">
+                                            <div class="main_card" data-category="static">
+                                                <div class="card_left">
+                                                    <div class="card_datails">
+                                                        <!-- <h1>Stop</h1> -->
+                                                        <div class="card_cat">
+                                                            <!-- <p class="PG">PG - 13</p> -->
+                                                            <h2>I</h2>
+                                                            
+                                                        </div>
+                                                        <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                        
+                                                    <div class="social-btn">
+                                    
+                                                        <!-- GET-->
+                                                        <button>
+                                                            <i class="fas fa-download"></i> DOWNLOAD
+                                                        </button>
+                                                        <!--BOOKMARK-->
+                                                    </div>	
+                                                    </div>
+                                                </div>
+                                                <div class="card_right">
+                                                    <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                        <video id="background-video">
+                                                            <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                        </video>
+                                                        <div class="overlay-text">Hover to play</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="wrapper">
+                                              <div class="main_card" data-category="static">
+                                                  <div class="card_left">
+                                                      <div class="card_datails">
+                                                          <!-- <h1>Stop</h1> -->
+                                                          <div class="card_cat">
+                                                              <!-- <p class="PG">PG - 13</p> -->
+                                                              <h2>YOU</h2>
+                                                              
+                                                          </div>
+                                                          <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                          
+                                                      <div class="social-btn">
+                                      
+                                                          <!-- GET-->
+                                                          <button>
+                                                              <i class="fas fa-download"></i> DOWNLOAD
+                                                          </button>
+                                                          <!--BOOKMARK-->
+                                                      </div>	
+                                                      </div>
+                                                  </div>
+                                                  <div class="card_right">
+                                                      <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                          <video id="background-video">
+                                                              <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                          </video>
+                                                          <div class="overlay-text">Hover to play</div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              </div>
+                                              <div class="wrapper">
+                                                <div class="main_card" data-category="static">
+                                                    <div class="card_left">
+                                                        <div class="card_datails">
+                                                            <!-- <h1>Stop</h1> -->
+                                                            <div class="card_cat">
+                                                                <!-- <p class="PG">PG - 13</p> -->
+                                                                <h2>LITTLE BIT</h2>
+                                                                
+                                                            </div>
+                                                            <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                            
+                                                        <div class="social-btn">
+                                        
+                                                            <!-- GET-->
+                                                            <button>
+                                                                <i class="fas fa-download"></i> DOWNLOAD
+                                                            </button>
+                                                            <!--BOOKMARK-->
+                                                        </div>	
+                                                        </div>
+                                                    </div>
+                                                    <div class="card_right">
+                                                        <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                            <video id="background-video">
+                                                                <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                            </video>
+                                                            <div class="overlay-text">Hover to play</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="wrapper">
+                                                  <div class="main_card" data-category="static">
+                                                      <div class="card_left">
+                                                          <div class="card_datails">
+                                                              <!-- <h1>Stop</h1> -->
+                                                              <div class="card_cat">
+                                                                  <!-- <p class="PG">PG - 13</p> -->
+                                                                  <h2>HOW</h2>
+                                                                  
+                                                              </div>
+                                                              <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                              
+                                                          <div class="social-btn">
+                                          
+                                                              <!-- GET-->
+                                                              <button>
+                                                                  <i class="fas fa-download"></i> DOWNLOAD
+                                                              </button>
+                                                              <!--BOOKMARK-->
+                                                          </div>	
+                                                          </div>
+                                                      </div>
+                                                      <div class="card_right">
+                                                          <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                              <video id="background-video">
+                                                                  <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                              </video>
+                                                              <div class="overlay-text">Hover to play</div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="wrapper">
+                                                    <div class="main_card" data-category="static">
+                                                        <div class="card_left">
+                                                            <div class="card_datails">
+                                                                <!-- <h1>Stop</h1> -->
+                                                                <div class="card_cat">
+                                                                    <!-- <p class="PG">PG - 13</p> -->
+                                                                    <h2>SICK</h2>
+                                                                    
+                                                                </div>
+                                                                <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                
+                                                            <div class="social-btn">
+                                            
+                                                                <!-- GET-->
+                                                                <button>
+                                                                    <i class="fas fa-download"></i> DOWNLOAD
+                                                                </button>
+                                                                <!--BOOKMARK-->
+                                                            </div>	
+                                                            </div>
+                                                        </div>
+                                                        <div class="card_right">
+                                                            <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                <video id="background-video">
+                                                                    <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                </video>
+                                                                <div class="overlay-text">Hover to play</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="wrapper">
+                                                      <div class="main_card" data-category="static">
+                                                          <div class="card_left">
+                                                              <div class="card_datails">
+                                                                  <!-- <h1>Stop</h1> -->
+                                                                  <div class="card_cat">
+                                                                      <!-- <p class="PG">PG - 13</p> -->
+                                                                      <h2>HUNGRY</h2>
+                                                                      
+                                                                  </div>
+                                                                  <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                  
+                                                              <div class="social-btn">
+                                              
+                                                                  <!-- GET-->
+                                                                  <button>
+                                                                      <i class="fas fa-download"></i> DOWNLOAD
+                                                                  </button>
+                                                                  <!--BOOKMARK-->
+                                                              </div>	
+                                                              </div>
+                                                          </div>
+                                                          <div class="card_right">
+                                                              <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                  <video id="background-video">
+                                                                      <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                  </video>
+                                                                  <div class="overlay-text">Hover to play</div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      </div>
+                                                      <div class="wrapper">
+                                                        <div class="main_card" data-category="moving">
+                                                            <div class="card_left">
+                                                                <div class="card_datails">
+                                                                    <!-- <h1>Stop</h1> -->
+                                                                    <div class="card_cat">
+                                                                        <!-- <p class="PG">PG - 13</p> -->
+                                                                        <h2>No movement</h2>
+                                                                        
+                                                                    </div>
+                                                                    <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                    
+                                                                <div class="social-btn">
+                                                
+                                                                    <!-- GET-->
+                                                                    <button>
+                                                                        <i class="fas fa-download"></i> DOWNLOAD
+                                                                    </button>
+                                                                    <!--BOOKMARK-->
+                                                                </div>	
+                                                                </div>
+                                                            </div>
+                                                            <div class="card_right">
+                                                                <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                    <video id="background-video">
+                                                                        <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                    </video>
+                                                                    <div class="overlay-text">Hover to play</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="wrapper">
+                                                          <div class="main_card" data-category="moving">
+                                                              <div class="card_left">
+                                                                  <div class="card_datails">
+                                                                      <!-- <h1>Stop</h1> -->
+                                                                      <div class="card_cat">
+                                                                          <!-- <p class="PG">PG - 13</p> -->
+                                                                          <h2>CLOCKWISE</h2>
+                                                                          
+                                                                      </div>
+                                                                      <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                      
+                                                                  <div class="social-btn">
+                                                  
+                                                                      <!-- GET-->
+                                                                      <button>
+                                                                          <i class="fas fa-download"></i> DOWNLOAD
+                                                                      </button>
+                                                                      <!--BOOKMARK-->
+                                                                  </div>	
+                                                                  </div>
+                                                              </div>
+                                                              <div class="card_right">
+                                                                  <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                      <video id="background-video">
+                                                                          <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                      </video>
+                                                                      <div class="overlay-text">Hover to play</div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          </div>
+                                                          <div class="wrapper">
+                                                            <div class="main_card" data-category="moving">
+                                                                <div class="card_left">
+                                                                    <div class="card_datails">
+                                                                        <!-- <h1>Stop</h1> -->
+                                                                        <div class="card_cat">
+                                                                            <!-- <p class="PG">PG - 13</p> -->
+                                                                            <h2>COUNTER CLOCKWISE</h2>
+                                                                            
+                                                                        </div>
+                                                                        <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                        
+                                                                    <div class="social-btn">
+                                                    
+                                                                        <!-- GET-->
+                                                                        <button>
+                                                                            <i class="fas fa-download"></i> DOWNLOAD
+                                                                        </button>
+                                                                        <!--BOOKMARK-->
+                                                                    </div>	
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card_right">
+                                                                    <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                        <video id="background-video">
+                                                                            <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                        </video>
+                                                                        <div class="overlay-text">Hover to play</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="wrapper">
+                                                              <div class="main_card" data-category="moving">
+                                                                  <div class="card_left">
+                                                                      <div class="card_datails">
+                                                                          <!-- <h1>Stop</h1> -->
+                                                                          <div class="card_cat">
+                                                                              <!-- <p class="PG">PG - 13</p> -->
+                                                                              <h2>No</h2>
+                                                                              
+                                                                          </div>
+                                                                          <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                          
+                                                                      <div class="social-btn">
+                                                      
+                                                                          <!-- GET-->
+                                                                          <button>
+                                                                              <i class="fas fa-download"></i> DOWNLOAD
+                                                                          </button>
+                                                                          <!--BOOKMARK-->
+                                                                      </div>	
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="card_right">
+                                                                      <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                          <video id="background-video">
+                                                                              <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                          </video>
+                                                                          <div class="overlay-text">Hover to play</div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              </div>
+                                                              <div class="wrapper">
+                                                                <div class="main_card" data-category="moving">
+                                                                    <div class="card_left">
+                                                                        <div class="card_datails">
+                                                                            <!-- <h1>Stop</h1> -->
+                                                                            <div class="card_cat">
+                                                                                <!-- <p class="PG">PG - 13</p> -->
+                                                                                <h2>YES</h2>
+                                                                                
+                                                                            </div>
+                                                                            <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                            
+                                                                        <div class="social-btn">
+                                                        
+                                                                            <!-- GET-->
+                                                                            <button>
+                                                                                <i class="fas fa-download"></i> DOWNLOAD
+                                                                            </button>
+                                                                            <!--BOOKMARK-->
+                                                                        </div>	
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card_right">
+                                                                        <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                            <video id="background-video">
+                                                                                <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                            </video>
+                                                                            <div class="overlay-text">Hover to play</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                                <div class="wrapper">
+                                                                  <div class="main_card" data-category="moving">
+                                                                      <div class="card_left">
+                                                                          <div class="card_datails">
+                                                                              <!-- <h1>Stop</h1> -->
+                                                                              <div class="card_cat">
+                                                                                  <!-- <p class="PG">PG - 13</p> -->
+                                                                                  <h2>POINTING UPWARDS</h2>
+                                                                                  
+                                                                              </div>
+                                                                              <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                              
+                                                                          <div class="social-btn">
+                                                          
+                                                                              <!-- GET-->
+                                                                              <button>
+                                                                                  <i class="fas fa-download"></i> DOWNLOAD
+                                                                              </button>
+                                                                              <!--BOOKMARK-->
+                                                                          </div>	
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="card_right">
+                                                                          <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                              <video id="background-video">
+                                                                                  <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                              </video>
+                                                                              <div class="overlay-text">Hover to play</div>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                                  </div>
+                                                                  <div class="wrapper">
+                                                                    <div class="main_card" data-category="moving">
+                                                                        <div class="card_left">
+                                                                            <div class="card_datails">
+                                                                                <!-- <h1>Stop</h1> -->
+                                                                                <div class="card_cat">
+                                                                                    <!-- <p class="PG">PG - 13</p> -->
+                                                                                    <h2>POINTING DOWNWARDS</h2>
+                                                                                    
+                                                                                </div>
+                                                                                <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                                
+                                                                            <div class="social-btn">
+                                                            
+                                                                                <!-- GET-->
+                                                                                <button>
+                                                                                    <i class="fas fa-download"></i> DOWNLOAD
+                                                                                </button>
+                                                                                <!--BOOKMARK-->
+                                                                            </div>	
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card_right">
+                                                                            <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                                <video id="background-video">
+                                                                                    <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                                </video>
+                                                                                <div class="overlay-text">Hover to play</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <div class="wrapper">
+                                                                      <div class="main_card" data-category="moving">
+                                                                          <div class="card_left">
+                                                                              <div class="card_datails">
+                                                                                  <!-- <h1>Stop</h1> -->
+                                                                                  <div class="card_cat">
+                                                                                      <!-- <p class="PG">PG - 13</p> -->
+                                                                                      <h2>WAVING</h2>
+                                                                                      
+                                                                                  </div>
+                                                                                  <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                                  
+                                                                              <div class="social-btn">
+                                                              
+                                                                                  <!-- GET-->
+                                                                                  <button>
+                                                                                      <i class="fas fa-download"></i> DOWNLOAD
+                                                                                  </button>
+                                                                                  <!--BOOKMARK-->
+                                                                              </div>	
+                                                                              </div>
+                                                                          </div>
+                                                                          <div class="card_right">
+                                                                              <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                                  <video id="background-video">
+                                                                                      <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                                  </video>
+                                                                                  <div class="overlay-text">Hover to play</div>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                      </div>
+                                      
+                                                                      <div class="wrapper">
+                                                                        <div class="main_card" data-category="moving">
+                                                                            <div class="card_left">
+                                                                                <div class="card_datails">
+                                                                                    <!-- <h1>Stop</h1> -->
+                                                                                    <div class="card_cat">
+                                                                                        <!-- <p class="PG">PG - 13</p> -->
+                                                                                        <h2>COME FORWARD</h2>
+                                                                                        
+                                                                                    </div>
+                                                                                    <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                                    
+                                                                                <div class="social-btn">
+                                                                
+                                                                                    <!-- GET-->
+                                                                                    <button>
+                                                                                        <i class="fas fa-download"></i> DOWNLOAD
+                                                                                    </button>
+                                                                                    <!--BOOKMARK-->
+                                                                                </div>	
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="card_right">
+                                                                                <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                                    <video id="background-video">
+                                                                                        <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                                    </video>
+                                                                                    <div class="overlay-text">Hover to play</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="wrapper">
+                                                                          <div class="main_card" data-category="moving">
+                                                                              <div class="card_left">
+                                                                                  <div class="card_datails">
+                                                                                      <!-- <h1>Stop</h1> -->
+                                                                                      <div class="card_cat">
+                                                                                          <!-- <p class="PG">PG - 13</p> -->
+                                                                                          <h2>SALUTING</h2>
+                                                                                          
+                                                                                      </div>
+                                                                                      <p class="disc">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</p>
+                                                                                      
+                                                                                  <div class="social-btn">
+                                                                  
+                                                                                      <!-- GET-->
+                                                                                      <button>
+                                                                                          <i class="fas fa-download"></i> DOWNLOAD
+                                                                                      </button>
+                                                                                      <!--BOOKMARK-->
+                                                                                  </div>	
+                                                                                  </div>
+                                                                              </div>
+                                                                              <div class="card_right">
+                                                                                  <div class="video-container" onmouseover="playVideo()" onmouseout="pauseVideo()">
+                                                                                      <video id="background-video">
+                                                                                          <source src="{% static 'images/yay.mp4' %}" type="video/mp4">
+                                                                                      </video>
+                                                                                      <div class="overlay-text">Hover to play</div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>
+                                                                          </div>
               <!-- <form method="post" >
                 <div class="divide">
                   <div class="vidButton">
@@ -220,6 +1074,74 @@
                 video.pause(); // Pause the video
                 document.querySelector(".overlay-text").style.display = "block"; // Show the overlay text
             }
+          
+            
+         
+              // JavaScript function to filter gestures based on search input
+              function filterGestures() {
+                  var input, filter, cards, card, title, i;
+                  input = document.getElementById("gesture-search");
+                  filter = input.value.toUpperCase();
+                  cards = document.getElementsByClassName("main_card");
+          
+                  for (i = 0; i < cards.length; i++) {
+                      card = cards[i];
+                      title = card.querySelector(".card_cat h2");
+          
+                      // Check if the title contains the filter text
+                      if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                          card.style.display = "";
+                      } else {
+                          card.style.display = "none";
+                      }
+                  }
+              }
+          
+              // Attach the filter function to the input's 'input' event
+              document.getElementById("gesture-search").addEventListener("input", filterGestures);
+          
+              // Attach the filter function to the search button's 'click' event
+              {% comment %} document.getElementById("search-button").addEventListener("click", filterGestures); {% endcomment %}
+              function filterGestures() {
+                var input, filter, cards, card, title, category, i;
+                input = document.getElementById("gesture-search");
+                filter = input.value.toUpperCase();
+                cards = document.getElementsByClassName("main_card");
+                var selectedCategory = getSelectedCategory();
+            
+                for (i = 0; i < cards.length; i++) {
+                    card = cards[i];
+                    title = card.querySelector(".card_cat h2");
+                    category = card.getAttribute("data-category");
+            
+                    // Check if the title contains the filter text and category matches the selected category
+                    if ((selectedCategory === "all" || selectedCategory === category) && title.innerText.toUpperCase().indexOf(filter) > -1) {
+                        card.style.display = "";
+                    } else {
+                        card.style.display = "none";
+                    }
+                }
+            }
+            
+            // Attach the filter function to the input's 'input' event
+            document.getElementById("gesture-search").addEventListener("input", filterGestures);
+            
+            // Attach the filter function to the category selection change event
+            var radioButtons = document.querySelectorAll('input[name="platform"]');
+            radioButtons.forEach(function (radioButton) {
+                radioButton.addEventListener("change", filterGestures);
+            });
+            
+            // Function to get the selected category value
+            function getSelectedCategory() {
+                var radioButtons = document.querySelectorAll('input[name="platform"]:checked');
+                if (radioButtons.length > 0) {
+                    return radioButtons[0].value;
+                }
+                return "all"; // Default to "all" if no category is selected
+            }
+            
+          
             </script>
     </body>
 </html>
