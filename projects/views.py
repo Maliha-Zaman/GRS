@@ -319,7 +319,7 @@ def test(request):
                 re_lines = re.strip()
                 if re_lines:
                     re = re_lines[-1]  # Extract the last line
-                    re = re.strip()
+                    # re = re.strip()
                     if re.lower() == text.lower():  # Case-insensitive comparison
                         ans = True
                     else:

@@ -17,7 +17,8 @@ tflite_save_path = 'model/keypoint_classifier/keypoint_classifier.tflite'
 
 
 
-NUM_CLASSES = 15
+NUM_CLASSES = 18
+
 
 
 X_dataset = np.loadtxt(dataset, delimiter=',', dtype='float32', usecols=list(range(1, (21 * 2) + 1)))
