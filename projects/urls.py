@@ -19,5 +19,5 @@ urlpatterns = [
      path('features/', views.features, name='features'),
     path('test/', views.test, name='test'),
     # path('gestures/', views.gestures_view, name='gestures'),
-    path('display-gestures/', views.display_gestures, name='display_gestures'),
+    path('gestures/', views.gestures, name='gestures'),
 ]

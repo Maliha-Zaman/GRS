@@ -6,6 +6,7 @@ from keytotext import pipeline
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
 from .models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib import messages
 from django.contrib.sessions.models import Session
@@ -24,6 +25,7 @@ nlp = pipeline("k2t")
 
 # keywords = ['Apple', 'Iphone', 'Samsung']
 # print(nlp(keywords))
+
 args = TTSettings(num_beams=5, min_length=1)
 happy_tt = HappyTextToText("T5", "vennify/t5-base-grammar-correction")
 def is_valid_password(password):
@@ -174,6 +176,18 @@ def logout(request):
 
 
 def start_backend(request):
+    user = None
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            user = None
+  
+    user_id = request.session.get('user_id')
+    
+    if not user_id:  # If 'user_id' is not present in the session
+        return redirect('login')  # Redirect to the login page
     re = ""
     re1 = ""
     if request.method == 'POST':
@@ -187,15 +201,28 @@ def start_backend(request):
             re = happy_tt.generate_text(result, args=args).text
             translator = Translator()
             re1 = translator.translate(re, dest='bn').text
-    return render(request, 'start_backend.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+    return render(request, 'start_backend.html',{'user':user,'gestures_output': re, 'gestures_output_bangla': re1})
+
 def moving(request):
+    user = None
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            user = None
+
+    user_id = request.session.get('user_id')
+    
+    if not user_id:  # If 'user_id' is not present in the session
+        return redirect('login')  # Redirect to the login page
     re = ""
     re1 = ""
     if request.method == 'POST':
         if 'start_button' in request.POST:
             result = subprocess.check_output(['python', 'moving.py'], universal_newlines=True)
 
-    return render(request, 'moving.html')
+    return render(request, 'moving.html',{'user':user})
 
 
 
@@ -220,7 +247,20 @@ def moving(request):
 
 #     # Handle other cases or return an empty response
 #     return HttpResponse('')
+
 def start_backendMultiple(request):
+    user = None
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            user = None
+   
+    user_id = request.session.get('user_id')
+    
+    if not user_id:  # If 'user_id' is not present in the session
+        return redirect('login')  # Redirect to the login page
     re = ""
     re1 = ""
     if request.method == 'POST':
@@ -234,7 +274,7 @@ def start_backendMultiple(request):
             re = happy_tt.generate_text(result, args=args)
             translator = Translator()
             re1 = translator.translate(re, dest='bn').text
-    return render(request, 'start_backendMultiple.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+    return render(request, 'start_backendMultiple.html',{'user':user,'gestures_output': re, 'gestures_output_bangla': re1})
 # def test(request):
 #     re = ""
 #     ans = ""
@@ -256,6 +296,18 @@ def start_backendMultiple(request):
 #     return render(request, 'test.html', {'gestures_output': re, 'gestures_output_bangla': ans})
 
 def test(request):
+    user = None
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            user = None
+    
+    user_id = request.session.get('user_id')
+    
+    if not user_id:  # If 'user_id' is not present in the session
+        return redirect('login')  # Redirect to the login page
     re = ""
     ans = ""
     text = request.POST.get('text', '').strip()  # Ensure text is not None
@@ -278,24 +330,36 @@ def test(request):
                 # Handle subprocess error if needed
                 ans = False
 
-    return render(request, 'test.html', {'gestures_output': re, 'gestures_output_text': text, 'gestures_output_ans': ans})
+    return render(request, 'test.html', {'user':user,'gestures_output': re, 'gestures_output_bangla': ans})
 
-# # whisper api
-# def gestureTest(request):
-#     re = ""
-#     re1 = ""
-#     if request.method == 'POST':
-#         # Check if the button was clicked
-#         if 'start_button' in request.POST:
-#             # Start the backend script (app.py)
-#             # Popen(["python", "app.py"])
-#             result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
-#             result = ' '.join(result.splitlines())
-#             # re = (nlp(result))
-#             re = happy_tt.generate_text(result, args=args)
-#             translator = Translator()
-#             re1 = translator.translate(re, dest='bn').text
-#     return render(request, 'gestureTest.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+# whisper api
+def gestureTest(request):
+    user = None
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            user = None
+    
+    user_id = request.session.get('user_id')
+    
+    if not user_id:  # If 'user_id' is not present in the session
+        return redirect('login')  # Redirect to the login page
+    re = ""
+    re1 = ""
+    if request.method == 'POST':
+        # Check if the button was clicked
+        if 'start_button' in request.POST:
+            # Start the backend script (app.py)
+            # Popen(["python", "app.py"])
+            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+            result = ' '.join(result.splitlines())
+            # re = (nlp(result))
+            re = happy_tt.generate_text(result, args=args)
+            translator = Translator()
+            re1 = translator.translate(re, dest='bn').text
+    return render(request, 'gestureTest.html',{'user':user,'gestures_output': re, 'gestures_output_bangla': re1})
 
 def send_password_reset_email(user):
     token = secrets.token_urlsafe(20)  # Generate a random token
@@ -334,12 +398,32 @@ def password_reset(request, token):
     return render(request, 'password_reset.html') 
 
 def features(request):
+   # Check if 'user_id' is present in the session
     
-    return render(request, 'features.html')
+    user = None
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            user = None
+    return render(request, 'features.html',{'user': user})
 
-def display_gestures(request):
+def gestures(request):
     # Run your script to get hand gestures
-    result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+    # result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
     
     # Pass the result to the template
-    return render(request, 'gestures.html', {'gestures_output': result})
+       
+    user = None
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            user = None
+    user_id = request.session.get('user_id')
+    
+    if not user_id:  # If 'user_id' is not present in the session
+        return redirect('login')  # Redirect to the login page
+    return render(request, 'gestures.html',{'user':user})

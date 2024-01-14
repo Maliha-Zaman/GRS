@@ -11,6 +11,25 @@
         <a href="{% url 'home' %}" style="text-decoration: none; color:white">
             <h2>Gesture Recognition System</h2>
         </a>
+        <ul class="navbar-nav ml-auto">
+            {% if user %}
+              <div class="header">
+                  <!-- <p> -->
+                    <i class="login__icon fas fa-user"></i> {{ user.username }}
+                  <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="logout-btn">Logout</button>
+                  </form>
+                  <!-- </p> -->
+              </div>
+            {% else %}
+                <div class="header-buttons">
+                  <a href="{% url 'login' %}" class="login-button">Login</a>
+                  <a href="{% url 'signup' %}" class="signup-button">Sign Up</a>
+                </div>
+            {% endif %}
+           
+          </ul>
         {% comment %} <div class="navbar-brand-container">
             <a class="navbar-brand" href="{% url 'home' %}">Gesture Recognition System</a>
         </div> {% endcomment %}
@@ -33,15 +52,33 @@
         <h2>03</h2>
         <h3>Test gestures</h3>
         <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
-        <a href="{% url 'test' %}"><button  class="simulation-button">Simulation</button></a>
+        <a href="{% url 'gestureTest' %}"><button  class="simulation-button">Simulation</button></a>
     </div>
     <div class="box">
         <h2>04</h2>
         <h3>Learn gestures</h3>
         <p>Our website allows you to access a real-time practice session for basic gesture recognition. This increases people's knowledge by letting them explore different gestures and the meaning of those.</p>
-        <a href="{% url 'test' %}"><button  class="simulation-button">Simulation</button></a>
+        <a href="{% url 'gestures' %}"><button  class="simulation-button">Simulation</button></a>
     </div>
 </div>
-
+<footer class="footer">
+    <div class="containers">
+      <div class="row">
+        <div class="name">
+          <p>Gesture Recognition System</p>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <ul class="list-unstyled">
+              <li><h2 class="made-by">Made by:</h2></li>
+              <li>Mohammad Ittehad Rahman Sami(S)</li>
+              <li>Maliha Zaman</li>
+              <li>Tamim Afnan</li>
+            </ul>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </footer>
 </body>
 </html>
