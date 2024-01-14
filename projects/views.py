@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from keytotext import pipeline
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
-from .models import User
+from .models import User, Test
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib import messages
@@ -297,10 +297,16 @@ def start_backendMultiple(request):
 
 def test(request):
     user = None
+    tests_done_by_user = ""
     if 'user_id' in request.session:
         user_id = request.session['user_id']
         try:
             user = User.objects.get(id=user_id)
+            # logged_in_user_id = request.session.get('user_id')
+
+# Assuming the logged_in_user_id is the ID of the currently logged-in user
+            # tests_done_by_user = Test.objects.filter(user__id=logged_in_user_id).select_related('user')
+
         except User.DoesNotExist:
             user = None
     
@@ -312,25 +318,26 @@ def test(request):
     ans = ""
     text = request.POST.get('text', '').strip()  # Ensure text is not None
     if request.method == 'POST':
-        # Check if the button was clicked
-        if 'test' in request.POST:
-            try:
-                re = subprocess.check_output(['python', 'test.py'], universal_newlines=True)
-                re_lines = re.strip()
-                if re_lines:
-                    re = re_lines[-1]  # Extract the last line
-                    # re = re.strip()
-                    if re.lower() == text.lower():  # Case-insensitive comparison
-                        ans = True
+            # Check if the button was clicked
+            if 'test' in request.POST:
+                try:
+                    re_lines = subprocess.check_output(['python', 'test.py'], universal_newlines=True).strip().splitlines()
+                    if re_lines:
+                        last_line = re_lines[-1]  # Extract the last line
+                        last_word = last_line.split()[-1]  # Extract the last word from the last line
+                        re = last_word.strip()
+                        if re.lower() == text.lower():  # Case-insensitive comparison
+                            ans = True
+                        else:
+                            ans = False
                     else:
-                        ans = False
-                else:
-                    ans = False  # No lines in the output
-            except subprocess.CalledProcessError as e:
-                # Handle subprocess error if needed
-                ans = False
-
-    return render(request, 'test.html', {'user':user,'gestures_output': re, 'gestures_output_bangla': ans})
+                        ans = False  # No lines in the output
+                except subprocess.CalledProcessError as e:
+                    # Handle subprocess error if needed
+                    ans = False
+            test_instance = Test.objects.create(input_text=text, output_text=re, match=ans)
+            user.tests.add(test_instance)
+    return render(request, 'test.html', {'user': user, 'gestures_output': re, 'gestures_output_bangla': ans})
 
 # whisper api
 def gestureTest(request):

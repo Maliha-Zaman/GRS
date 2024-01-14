@@ -79,14 +79,15 @@ def main():
               encoding='utf-8-sig') as f:
         keypoint_classifier_labels = csv.reader(f)
         keypoint_classifier_labels = [
-            row[0] for row in keypoint_classifier_labels
+            row[0] for row in keypoint_classifier_labels if row
         ]
+    
     with open(
             'model/point_history_classifier/point_history_classifier_label.csv',
             encoding='utf-8-sig') as f:
         point_history_classifier_labels = csv.reader(f)
         point_history_classifier_labels = [
-            row[0] for row in point_history_classifier_labels
+            row[0] for row in point_history_classifier_labels if row
         ]
 
     # FPS Measurement ########################################################

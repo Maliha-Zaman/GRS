@@ -655,4 +655,15 @@ form {
   .video-container{
 	width: 500px;
   }
-  
+.previous{
+	margin-bottom: 20px;
+	background-color: #d6d1fc;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 9px 9px 9px #5C5696;
+	transition: .2s;
+	margin-top: 25px;
+	margin-left: 40px;
+	margin-right: 40px;
+}
