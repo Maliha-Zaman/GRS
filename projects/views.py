@@ -267,7 +267,7 @@ def test(request):
                 re_lines = re.strip()
                 if re_lines:
                     re = re_lines[-1]  # Extract the last line
-                    re = re.strip()
+                    # re = re.strip()
                     if re.lower() == text.lower():  # Case-insensitive comparison
                         ans = True
                     else:
@@ -278,24 +278,24 @@ def test(request):
                 # Handle subprocess error if needed
                 ans = False
 
-    return render(request, 'test.html', {'gestures_output': re, 'gestures_output_bangla': ans})
+    return render(request, 'test.html', {'gestures_output': re, 'gestures_output_text': text, 'gestures_output_ans': ans})
 
-# whisper api
-def gestureTest(request):
-    re = ""
-    re1 = ""
-    if request.method == 'POST':
-        # Check if the button was clicked
-        if 'start_button' in request.POST:
-            # Start the backend script (app.py)
-            # Popen(["python", "app.py"])
-            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
-            result = ' '.join(result.splitlines())
-            # re = (nlp(result))
-            re = happy_tt.generate_text(result, args=args)
-            translator = Translator()
-            re1 = translator.translate(re, dest='bn').text
-    return render(request, 'gestureTest.html',{'gestures_output': re, 'gestures_output_bangla': re1})
+# # whisper api
+# def gestureTest(request):
+#     re = ""
+#     re1 = ""
+#     if request.method == 'POST':
+#         # Check if the button was clicked
+#         if 'start_button' in request.POST:
+#             # Start the backend script (app.py)
+#             # Popen(["python", "app.py"])
+#             result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+#             result = ' '.join(result.splitlines())
+#             # re = (nlp(result))
+#             re = happy_tt.generate_text(result, args=args)
+#             translator = Translator()
+#             re1 = translator.translate(re, dest='bn').text
+#     return render(request, 'gestureTest.html',{'gestures_output': re, 'gestures_output_bangla': re1})
 
 def send_password_reset_email(user):
     token = secrets.token_urlsafe(20)  # Generate a random token
