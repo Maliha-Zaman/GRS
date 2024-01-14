@@ -1,4 +1,3 @@
-
 from django.db import models
 import hashlib
 
@@ -6,6 +5,7 @@ class Test(models.Model):
     input_text = models.CharField(max_length=255)
     output_text = models.CharField(max_length=255)
     match = models.BooleanField(default=False)
+
 class User(models.Model):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)

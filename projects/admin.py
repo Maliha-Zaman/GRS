@@ -6,4 +6,3 @@ from .models import Test
 
 admin.site.register(User)
 admin.site.register(Test)
-
