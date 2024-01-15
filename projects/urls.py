@@ -18,6 +18,7 @@ urlpatterns = [
     path('gestureTest/', views.gestureTest, name='gestureTest'),
      path('features/', views.features, name='features'),
     path('test/', views.test, name='test'),
+    path('test_history/', views.test_history, name='test_history'),
     # path('gestures/', views.gestures_view, name='gestures'),
     path('gestures/', views.gestures, name='gestures'),
 ]

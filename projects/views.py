@@ -296,10 +296,6 @@ def test(request):
     except User.DoesNotExist:
         # Handle the case where the user does not exist
         return redirect('login')
-    
-    previous_tests = Test.objects.filter(user=user) 
-    # context = {'items': items, 'seller': seller}
-    # return render(request, 'seller/myitem.html', context)
     re = ""
     ans = ""
     text = request.POST.get('text', '').strip()
@@ -317,13 +313,39 @@ def test(request):
                 ans = False
         except subprocess.CalledProcessError as e:
             ans = False
-        
-        # Check if user is not None before adding the test_instance
-        # if user:
-            # Create a new test instance and associate it with the user
     
-    print(f"{previous_tests}")
-    print(f"User: {user.email}")
+    return render(request, 'test.html', {'user': user, 'gestures_output': re, 'gestures_output_bangla': ans})
+
+def generate_pie_chart(percentage):
+    labels = ['True Matches', 'False Matches']
+    sizes = [percentage, 100 - percentage]
+
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=['#5C5696', 'silver'])
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+    # Save the plot to a BytesIO object
+    img_bytes = BytesIO()
+    plt.savefig(img_bytes, format='png')
+    img_bytes.seek(0)
+
+    # Encode the plot image as base64
+    img_base64 = base64.b64encode(img_bytes.read()).decode('utf-8')
+
+    plt.close()
+
+    return img_base64
+def test_history(request):
+    user = None
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('login')
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        # Handle the case where the user does not exist
+        return redirect('login')
+    
+    previous_tests = Test.objects.filter(user=user) 
     matches = [test.match for test in previous_tests]
     print(f"{matches}")
     match_count = 0
@@ -339,12 +361,10 @@ def test(request):
     try:
         percentage = match_count/count * 100
     except:
-        return render(request, 'test.html', {'user': user, 'gestures_output': re, 'gestures_output_bangla': ans, 'previous_tests': previous_tests})
-
+        return render(request, 'test_history.html', {'user': user, 'previous_tests': previous_tests})
+    pie_chart = generate_pie_chart(percentage)
     # match_graph = generate_match_graph(previous_tests)
-    return render(request, 'test.html', {'user': user, 'gestures_output': re, 'gestures_output_bangla': ans, 'previous_tests': previous_tests, "percentage": percentage})
-
-
+    return render(request, 'test_history.html', {'user': user, 'previous_tests': previous_tests, "percentage": percentage,'pie_chart': pie_chart})
 
 
 # whisper api
