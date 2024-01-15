@@ -200,13 +200,10 @@ def moving(request):
             user = User.objects.get(id=user_id)
         except User.DoesNotExist:
             user = None
-
     user_id = request.session.get('user_id')
-    
+   
     if not user_id:  # If 'user_id' is not present in the session
         return redirect('login')  # Redirect to the login page
-    re = ""
-    re1 = ""
     if request.method == 'POST':
         if 'start_button' in request.POST:
             result = subprocess.check_output(['python', 'moving.py'], universal_newlines=True)
@@ -257,7 +254,7 @@ def start_backendMultiple(request):
         if 'start_button' in request.POST:
             # Start the backend script (app.py)
             # Popen(["python", "app.py"])
-            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+            result = subprocess.check_output(['python', 'moving.py'], universal_newlines=True)
             result = ' '.join(result.splitlines())
             # re = (nlp(result))
             re = happy_tt.generate_text(result, args=args)
