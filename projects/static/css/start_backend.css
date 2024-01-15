@@ -91,7 +91,7 @@ h1 {
 .screen__content {
 	z-index: 1;
 	position: relative;	
-	height: 100%;
+	height: 130%;
 }
 
 .screen__background {		

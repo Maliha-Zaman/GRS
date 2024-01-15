@@ -1021,19 +1021,7 @@
             </div>
           </footer>
           <script>// Get the video element
-            {% comment %} var video = document.getElementById("background-video");
-
-            // Function to play the video
-            function playVideo() {
-                video.play();  // Play the video
-                document.querySelector(".overlay-text").style.display = "none"; // Hide the overlay text
-            }
-
-            // Function to pause the video
-            function pauseVideo() {
-                video.pause(); // Pause the video
-                document.querySelector(".overlay-text").style.display = "block"; // Show the overlay text
-            } {% endcomment %}
+            
             function playVideo(videoId) {
               var video = document.getElementById(videoId);
               var overlayText = document.querySelector("#" + videoId + " + .overlay-text");
