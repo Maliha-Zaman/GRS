@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from keytotext import pipeline
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
-from .models import User
+from .models import User, Test
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib import messages
@@ -21,6 +21,9 @@ from happytransformer import HappyTextToText
 from happytransformer import TTSettings
 from googletrans import Translator
 from django.http import HttpResponse
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 nlp = pipeline("k2t")
 
 # keywords = ['Apple', 'Iphone', 'Samsung']
@@ -75,6 +78,26 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, 'registration/signup.html', {'form': form})
+def generate_match_graph(previous_tests):
+    # matches = [test.match for test in previous_tests]
+    # match_count = [sum(matches[:i+1]) for i in range(len(matches))]
+
+    plt.plot(range(1, len(matches) + 1), match_count, marker='o')
+    plt.xlabel('Number of Tests Taken')
+    plt.ylabel('Cumulative Matches')
+    plt.title('Match vs Number of Tests Taken')
+
+    # Save the plot to a BytesIO object
+    img_bytes = BytesIO()
+    plt.savefig(img_bytes, format='png')
+    img_bytes.seek(0)
+    
+    # Encode the plot image as base64
+    img_base64 = base64.b64encode(img_bytes.read()).decode('utf-8')
+
+    plt.close()
+
+    return img_base64
 
 def verify_email(request, verification_token):
     try:
@@ -87,40 +110,6 @@ def verify_email(request, verification_token):
         messages.error(request, 'Email verification failed. Please try again or contact support.')
         return redirect('registration/signup.html')
     
-# def login(request):
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             email = form.cleaned_data['email']
-#             password = form.cleaned_data['password']
-            
-
-#             try:
-                
-#                 user = User.objects.get(email__iexact=email)
-#                 print(f"Entered password: {password}")
-#                 print(f"Stored password hash: {user.password}")
-#                 if user and check_password(password, user.password) and user.is_verified:
-                    
-#                     print("correctttt wowho")
-#                     # Correct password and verified user
-#                     session = Session(session_key=str(user.id))
-#                     session.expire_date = timezone.now() + timedelta(days=7)  
-#                     session.save()
-#                     request.session['user_id'] = user.id
-#                     return redirect('home')  # Redirect to the dashboard after successful login
-#                 else:
-#                     messages.error(request, 'Invalid login credentials.')
-#                     print("User does not exist or passwords do not match")
-#                     return render(request, 'verificatio_failed.html')
-#             except User.DoesNotExist:
-#                 messages.error(request, 'Invalid login credentials.')
-
-#     else:
-#         form = LoginForm()
-
-#     return render(request, 'registration/login.html', {'form': form})
-
 def login(request):
     error_message = None  # Initialize error_message to None
 
@@ -211,13 +200,10 @@ def moving(request):
             user = User.objects.get(id=user_id)
         except User.DoesNotExist:
             user = None
-
     user_id = request.session.get('user_id')
-    
+   
     if not user_id:  # If 'user_id' is not present in the session
         return redirect('login')  # Redirect to the login page
-    re = ""
-    re1 = ""
     if request.method == 'POST':
         if 'start_button' in request.POST:
             result = subprocess.check_output(['python', 'moving.py'], universal_newlines=True)
@@ -268,7 +254,7 @@ def start_backendMultiple(request):
         if 'start_button' in request.POST:
             # Start the backend script (app.py)
             # Popen(["python", "app.py"])
-            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
+            result = subprocess.check_output(['python', 'moving.py'], universal_newlines=True)
             result = ' '.join(result.splitlines())
             # re = (nlp(result))
             re = happy_tt.generate_text(result, args=args)
@@ -294,43 +280,89 @@ def start_backendMultiple(request):
 #                 # Handle subprocess error if needed
 #                 ans = False
 #     return render(request, 'test.html', {'gestures_output': re, 'gestures_output_bangla': ans})
+# views.py
+
 
 def test(request):
     user = None
-    if 'user_id' in request.session:
-        user_id = request.session['user_id']
-        try:
-            user = User.objects.get(id=user_id)
-        except User.DoesNotExist:
-            user = None
-    
     user_id = request.session.get('user_id')
-    
-    if not user_id:  # If 'user_id' is not present in the session
-        return redirect('login')  # Redirect to the login page
+    if not user_id:
+        return redirect('login')
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        # Handle the case where the user does not exist
+        return redirect('login')
     re = ""
     ans = ""
-    text = request.POST.get('text', '').strip()  # Ensure text is not None
-    if request.method == 'POST':
-        # Check if the button was clicked
-        if 'test' in request.POST:
-            try:
-                re = subprocess.check_output(['python', 'test.py'], universal_newlines=True)
-                re_lines = re.strip()
-                if re_lines:
-                    re = re_lines[-1]  # Extract the last line
-                    # re = re.strip()
-                    if re.lower() == text.lower():  # Case-insensitive comparison
-                        ans = True
-                    else:
-                        ans = False
-                else:
-                    ans = False  # No lines in the output
-            except subprocess.CalledProcessError as e:
-                # Handle subprocess error if needed
+    text = request.POST.get('text', '').strip()
+    if request.method == 'POST' and 'test' in request.POST:
+        try:
+            re_lines = subprocess.check_output(['python', 'test.py'], universal_newlines=True).strip().splitlines()
+            if re_lines:
+                last_line = re_lines[-1]
+                last_word = last_line.split()[-1]
+                re = last_word.strip()
+                ans = re.lower() == text.lower()
+                Test.objects.create(user=user, input_text=text, output_text=re, match=ans)
+                # user.tests.add(test_instance)
+            else:
                 ans = False
+        except subprocess.CalledProcessError as e:
+            ans = False
+    
+    return render(request, 'test.html', {'user': user, 'gestures_output': re, 'gestures_output_bangla': ans})
 
-    return render(request, 'test.html', {'user':user,'gestures_output': re, 'gestures_output_bangla': ans})
+def generate_pie_chart(percentage):
+    labels = ['True Matches', 'False Matches']
+    sizes = [percentage, 100 - percentage]
+
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=['#5C5696', 'silver'])
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+    # Save the plot to a BytesIO object
+    img_bytes = BytesIO()
+    plt.savefig(img_bytes, format='png')
+    img_bytes.seek(0)
+
+    # Encode the plot image as base64
+    img_base64 = base64.b64encode(img_bytes.read()).decode('utf-8')
+
+    plt.close()
+
+    return img_base64
+def test_history(request):
+    user = None
+    user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('login')
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        # Handle the case where the user does not exist
+        return redirect('login')
+    
+    previous_tests = Test.objects.filter(user=user) 
+    matches = [test.match for test in previous_tests]
+    print(f"{matches}")
+    match_count = 0
+    count = 0
+    for i in range(len(matches)):
+        if matches[i] == True:
+            match_count = match_count + 1
+            count = count + 1
+            print(f"{matches[i]}")
+        else:
+            count = count + 1
+    print(f"{count}")
+    try:
+        percentage = match_count/count * 100
+    except:
+        return render(request, 'test_history.html', {'user': user, 'previous_tests': previous_tests})
+    pie_chart = generate_pie_chart(percentage)
+    # match_graph = generate_match_graph(previous_tests)
+    return render(request, 'test_history.html', {'user': user, 'previous_tests': previous_tests, "percentage": percentage,'pie_chart': pie_chart})
+
 
 # whisper api
 def gestureTest(request):
