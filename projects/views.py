@@ -190,6 +190,7 @@ def moving(request):
             user = None
     user_id = request.session.get('user_id')
    
+   
     if not user_id:  # If 'user_id' is not present in the session
         return redirect('login')  # Redirect to the login page
     if request.method == 'POST':
