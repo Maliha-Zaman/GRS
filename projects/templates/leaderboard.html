@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulation</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/start_backend.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+</head>
+<header>
+    <div class="title">    
+        
+            <a href="{% url 'home' %}" style="text-decoration: none;">
+                <h2>Gesture Recognition System</h2>
+            </a>
+            <ul class="navbar-nav ml-auto">
+              {% if user %}
+                <div class="header">
+                    <!-- <p> -->
+                      <i class="login__icon fas fa-user"></i> {{ user.username }}
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                    <!-- </p> -->
+                </div>
+             
+              {% endif %}
+             
+            </ul>
+        
+    </div>
+    
+  </header>
+<body>
+  <div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+ </div>
+  <div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+ </div>
+    <!-- <h1>Click to Start Backend</h1> -->
+    <div class="container">
+      <div class="screen">
+        <div class="screen__content">
+          <div class="login__field">
+            <p class="text">Leaderboard</p>
+          </div>
+
+
+          <div class="previous">
+            
+            <div>
+<<<<<<< HEAD
+              {% comment %} <p>Percentage: {{ percentage }}</p> {% endcomment %}
+=======
+
+>>>>>>> e8ff8de3cb46a5eca10932bf49864c24b7b1121f
+              <h2>Leaderboard</h2>
+                <table>
+                  <tr>
+                    <th>User</th>
+                    <th>Total Tests</th>
+                  </tr>
+                  {% for user_count in user_counts %}
+                    <tr>
+                      <td>{{ user_count.username }}</td>
+                      <td>{{ user_count.true_match_count }}</td>
+                    </tr>
+                  {% endfor %}
+                </table>
+
+
+            <div>
+<<<<<<< HEAD
+            {% comment %} <div>
+                <img src="data:image/png;base64,{{ pie_chart }}" alt="True vs False Matches Pie Chart">
+            </div> {% endcomment %}
+          </div>
+          <!-- Add this to your test.html template -->
+          {% comment %} <div>
+            <img src="data:image/png;base64,{{ match_graph }}" alt="Match vs Number of Tests Taken">
+          </div> {% endcomment %}
+=======
+>>>>>>> e8ff8de3cb46a5eca10932bf49864c24b7b1121f
+        </div>
+      </div>
+    </div>
+
+        <footer class="footer">
+            <div class="containers">
+              <div class="row">
+                <div class="name">
+                  <p>Gesture Recognition System</p>
+                </div>
+                <div class="col-md">
+                  <div class="ftco-footer-widget mb-4">
+                    <ul class="list-unstyled">
+                      <li><h2 class="made-by">Made by:</h2></li>
+                      <li>Mohammad Ittehad Rahman Sami</li>
+                      <li>Maliha Zaman</li>
+                      <li>Tamim Afnan</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>  
+            </div>
+          </footer>
+    </body>
+</html>

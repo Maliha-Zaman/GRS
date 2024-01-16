@@ -37,7 +37,6 @@ def get_args():
 
     return args
 
-
 def main():
     # Argument parsing #################################################################
     args = get_args()
@@ -238,7 +237,6 @@ def main():
 
     cap.release()
     cv.destroyAllWindows()
-
 
 def select_mode(key, mode):
     number = -1
