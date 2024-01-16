@@ -18,13 +18,6 @@ class User(models.Model):
 
     def check_password(self, password):
         return self.password == hashlib.sha256(password.encode()).hexdigest()
-<<<<<<< HEAD
-# class Test(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     result = models.TextField()  # Store the test result
-#     timestamp = models.DateTimeField(auto_now_add=True)  # Timestamp for when the test was taken
-# User.test_set = property(lambda u: Test.objects.filter(user=u))
-=======
 
 class Test(models.Model):
     input_text = models.TextField()
@@ -33,4 +26,3 @@ class Test(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     def __str__(self):
         return f'Test {self.id}'
->>>>>>> a07126ad8087025167d95bb234a6f3a92a301e22
