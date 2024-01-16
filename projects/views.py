@@ -22,8 +22,15 @@ from happytransformer import TTSettings
 from googletrans import Translator
 from django.http import HttpResponse
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+import matplotlib
+matplotlib.use('Agg')
+from django.db.models import Count, Q
+
+
 from io import BytesIO
 import base64
+
 nlp = pipeline("k2t")
 
 # keywords = ['Apple', 'Iphone', 'Samsung']
@@ -35,6 +42,7 @@ def is_valid_password(password):
     # Check if the password meets the criteria
     regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
     return re.match(regex, password)
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -48,9 +56,6 @@ def register(request):
                 return render(request, 'registration/signup.html', {'form': form, 'error_message': 'Password must be at least 8 characters long, contain at least one special character, one uppercase letter, and one lowercase letter.'})
             if password != confirm_password:
                 return render(request, 'registration/signup.html', {'form': form, 'error_message': 'Passwords do not match.'})
-
-        
-
             # Check if the email already exists in the database
             if User.objects.filter(email=email).exists():
                 return render(request, 'registration/signup.html', {'form': form, 'error_message': 'Email already exists.'})
@@ -78,26 +83,6 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, 'registration/signup.html', {'form': form})
-def generate_match_graph(previous_tests):
-    # matches = [test.match for test in previous_tests]
-    # match_count = [sum(matches[:i+1]) for i in range(len(matches))]
-
-    plt.plot(range(1, len(matches) + 1), match_count, marker='o')
-    plt.xlabel('Number of Tests Taken')
-    plt.ylabel('Cumulative Matches')
-    plt.title('Match vs Number of Tests Taken')
-
-    # Save the plot to a BytesIO object
-    img_bytes = BytesIO()
-    plt.savefig(img_bytes, format='png')
-    img_bytes.seek(0)
-    
-    # Encode the plot image as base64
-    img_base64 = base64.b64encode(img_bytes.read()).decode('utf-8')
-
-    plt.close()
-
-    return img_base64
 
 def verify_email(request, verification_token):
     try:
@@ -156,10 +141,12 @@ def home(request):
 
     return render(request, 'home.html', {'user': user})
 
+
 def logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']
     return redirect('login')
+
 
 
 
@@ -192,6 +179,7 @@ def start_backend(request):
             re1 = translator.translate(re, dest='bn').text
     return render(request, 'start_backend.html',{'user':user,'gestures_output': re, 'gestures_output_bangla': re1})
 
+
 def moving(request):
     user = None
     if 'user_id' in request.session:
@@ -211,29 +199,6 @@ def moving(request):
     return render(request, 'moving.html',{'user':user})
 
 
-
-
-# def audio(request):
-#     if request.method == 'POST':
-#         # Check if the button was clicked
-#         if 'audio' in request.POST:
-#             # Get the text from the 're' variable
-#             text_to_convert = request.POST.get('re', '')
-            
-#             # Perform the audio conversion (replace this with your actual audio generation logic)
-#             # For example, using a text-to-speech tool like gTTS
-#             # Install gTTS using: pip install gtts
-#             subprocess.run(['gtts-cli', text_to_convert, '--output', 'output_audio.mp3'])
-
-#             # Return the generated audio file as a response
-#             with open('output_audio.mp3', 'rb') as audio_file:
-#                 response = HttpResponse(audio_file.read(), content_type='audio/mpeg')
-#                 response['Content-Disposition'] = 'attachment; filename="output_audio.mp3"'
-#                 return response
-
-#     # Handle other cases or return an empty response
-#     return HttpResponse('')
-
 def start_backendMultiple(request):
     user = None
     if 'user_id' in request.session:
@@ -245,15 +210,12 @@ def start_backendMultiple(request):
    
     user_id = request.session.get('user_id')
     
-    if not user_id:  # If 'user_id' is not present in the session
-        return redirect('login')  # Redirect to the login page
+    if not user_id:
+        return redirect('login')  
     re = ""
     re1 = ""
     if request.method == 'POST':
-        # Check if the button was clicked
         if 'start_button' in request.POST:
-            # Start the backend script (app.py)
-            # Popen(["python", "app.py"])
             result = subprocess.check_output(['python', 'moving.py'], universal_newlines=True)
             result = ' '.join(result.splitlines())
             # re = (nlp(result))
@@ -261,27 +223,6 @@ def start_backendMultiple(request):
             translator = Translator()
             re1 = translator.translate(re, dest='bn').text
     return render(request, 'start_backendMultiple.html',{'user':user,'gestures_output': re, 'gestures_output_bangla': re1})
-# def test(request):
-#     re = ""
-#     ans = ""
-#     text = request.POST.get('text', '')  # Ensure text is not None
-#     if request.method == 'POST':
-#         # Check if the button was clicked
-#         if 'test' in request.POST:
-#             # Start the backend script (app.py)
-#             try:
-#                 re = subprocess.check_output(['python', 'test.py'], universal_newlines=True)
-#                 re = re.strip()  # Remove leading/trailing whitespaces
-#                 if re.lower() == text.lower():  # Case-insensitive comparison
-#                     ans = True
-#                 else:
-#                     ans = False
-#             except subprocess.CalledProcessError as e:
-#                 # Handle subprocess error if needed
-#                 ans = False
-#     return render(request, 'test.html', {'gestures_output': re, 'gestures_output_bangla': ans})
-# views.py
-
 
 def test(request):
     user = None
@@ -291,7 +232,6 @@ def test(request):
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
-        # Handle the case where the user does not exist
         return redirect('login')
     re = ""
     ans = ""
@@ -305,7 +245,6 @@ def test(request):
                 re = last_word.strip()
                 ans = re.lower() == text.lower()
                 Test.objects.create(user=user, input_text=text, output_text=re, match=ans)
-                # user.tests.add(test_instance)
             else:
                 ans = False
         except subprocess.CalledProcessError as e:
@@ -313,24 +252,27 @@ def test(request):
     
     return render(request, 'test.html', {'user': user, 'gestures_output': re, 'gestures_output_bangla': ans})
 
+
 def generate_pie_chart(percentage):
     labels = ['True Matches', 'False Matches']
     sizes = [percentage, 100 - percentage]
 
-    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=['#5C5696', 'silver'])
-    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    fig, ax = plt.subplots()
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=['#5C5696', 'silver'])
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
     # Save the plot to a BytesIO object
     img_bytes = BytesIO()
-    plt.savefig(img_bytes, format='png')
-    img_bytes.seek(0)
+    canvas = FigureCanvasAgg(fig)
+    canvas.print_png(img_bytes)
 
-    # Encode the plot image as base64
+    img_bytes.seek(0)
     img_base64 = base64.b64encode(img_bytes.read()).decode('utf-8')
 
     plt.close()
 
     return img_base64
+
 def test_history(request):
     user = None
     user_id = request.session.get('user_id')
@@ -341,6 +283,12 @@ def test_history(request):
     except User.DoesNotExist:
         # Handle the case where the user does not exist
         return redirect('login')
+    
+    user_counts = (
+        User.objects
+        .annotate(true_match_count=Count('test', filter=Q(test__match=True)))
+        .order_by('-true_match_count')
+    )
     
     previous_tests = Test.objects.filter(user=user) 
     matches = [test.match for test in previous_tests]
@@ -360,38 +308,28 @@ def test_history(request):
     except:
         return render(request, 'test_history.html', {'user': user, 'previous_tests': previous_tests})
     pie_chart = generate_pie_chart(percentage)
-    # match_graph = generate_match_graph(previous_tests)
-    return render(request, 'test_history.html', {'user': user, 'previous_tests': previous_tests, "percentage": percentage,'pie_chart': pie_chart})
-
-
-# whisper api
-def gestureTest(request):
+    
+    
+    return render(request, 'test_history.html', {'user': user, 'previous_tests': previous_tests, "percentage": percentage,'pie_chart': pie_chart, 'user_counts': user_counts})
+def leaderboard(request):
     user = None
-    if 'user_id' in request.session:
-        user_id = request.session['user_id']
-        try:
-            user = User.objects.get(id=user_id)
-        except User.DoesNotExist:
-            user = None
-    
     user_id = request.session.get('user_id')
+    if not user_id:
+        return redirect('login')
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        # Handle the case where the user does not exist
+        return redirect('login')
     
-    if not user_id:  # If 'user_id' is not present in the session
-        return redirect('login')  # Redirect to the login page
-    re = ""
-    re1 = ""
-    if request.method == 'POST':
-        # Check if the button was clicked
-        if 'start_button' in request.POST:
-            # Start the backend script (app.py)
-            # Popen(["python", "app.py"])
-            result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
-            result = ' '.join(result.splitlines())
-            # re = (nlp(result))
-            re = happy_tt.generate_text(result, args=args)
-            translator = Translator()
-            re1 = translator.translate(re, dest='bn').text
-    return render(request, 'gestureTest.html',{'user':user,'gestures_output': re, 'gestures_output_bangla': re1})
+    user_counts = (
+        User.objects
+        .annotate(true_match_count=Count('test', filter=Q(test__match=True)))
+        .order_by('-true_match_count')
+    )
+    
+    
+    return render(request, 'leaderboard.html', {'user': user, 'user_counts': user_counts})
 
 def send_password_reset_email(user):
     token = secrets.token_urlsafe(20)  # Generate a random token
