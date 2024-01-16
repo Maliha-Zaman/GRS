@@ -2,6 +2,8 @@
 from django.db import models
 import hashlib
 
+
+
 class User(models.Model):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
@@ -15,3 +17,8 @@ class User(models.Model):
 
     def check_password(self, password):
         return self.password == hashlib.sha256(password.encode()).hexdigest()
+# class Test(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     result = models.TextField()  # Store the test result
+#     timestamp = models.DateTimeField(auto_now_add=True)  # Timestamp for when the test was taken
+# User.test_set = property(lambda u: Test.objects.filter(user=u))
