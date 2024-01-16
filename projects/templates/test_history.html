@@ -75,6 +75,7 @@
                     <span class="button__text">Leaderboard</span>
                   </button>
               </a>
+<<<<<<< HEAD
               {% comment %} <p>Leaderboard: </p>
               {% for test_instance in leaderboard %}
               User: {{ test_instance.user.username }} <br>
@@ -83,15 +84,15 @@
               Match: {{ test_instance.match }}<br>
               <hr>
               {% endfor %} {% endcomment %}
+=======
+
+>>>>>>> e8ff8de3cb46a5eca10932bf49864c24b7b1121f
             <div>
             <div>
                 <img src="data:image/png;base64,{{ pie_chart }}" alt="True vs False Matches Pie Chart">
             </div>
           </div>
           <!-- Add this to your test.html template -->
-          {% comment %} <div>
-            <img src="data:image/png;base64,{{ match_graph }}" alt="Match vs Number of Tests Taken">
-          </div> {% endcomment %}
         </div>
       </div>
     </div>

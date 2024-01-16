@@ -228,7 +228,6 @@ def main():
     cap.release()
     cv.destroyAllWindows()
 
-
 def select_mode(key, mode):
     number = -1
     if 48 <= key <= 57:  # 0 ~ 9
