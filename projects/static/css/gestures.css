@@ -4,19 +4,25 @@ body {
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
 }
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+	margin-top: 70px;
+    margin-bottom: 20px;
+}
+  
 
 .main_card {
-	color: #fff;
-	width: 760px;
+	color: black;
+	width: 600px;
 	height: 390px;
 	margin: 150px auto;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
 	max-width: 770px;
-	background:  #6A679E; 
+	background:  whitesmoke; 
 	border-radius: 10px;
-    
+    display: flex;
+	justify-content: space-between; /* Adjust as needed */
+	margin-bottom: 20px; /* Add margin between pairs if desired */
  
 
 	/* background: -webkit-linear-gradient(to right, rgba(60,132,206,1), rgb(123, 21, 116));
@@ -30,7 +36,9 @@ body {
 	box-shadow: none;
 
 			transition: all 0.3s ease-in-out;
-			border: 2px solid rgba(255, 255, 255, 0.3); 
+			border-width: 0;
+			border-style: solid;
+			border-color: #e2e8f0;
 }
 .main_card:hover {
 	border-color: rgba(255, 255, 255, 0.7); /* Change border color on hover */
@@ -174,12 +182,39 @@ button:hover {
   video {
 	width: 100%;
 	height: 100%;
-	margin-left: 0px;
+	margin-left: 10px;
 	display: block; /* Remove any inline whitespace */
     object-fit: cover; /* Cover the entire container */
     border: 1px solid #ffffff; /* Add a white border around the video */
     border-radius: 8px; /* Add some border-radius for rounded corners */
 	box-shadow: #255;
+	margin-top: 50px;
+  }
+  button {
+	position: relative;
+	display: inline-block;
+	margin: -3px;
+	padding: 10px 12px;
+	text-align: center;
+	font-size: 18px;
+	letter-spacing: 1px;
+	text-decoration: none;
+	color: #725AC1;
+	background: transparent;
+	cursor: pointer;
+	transition: ease-out 0.5s;
+	border: 2px solid #725AC1;
+	border-radius: 10px;
+	box-shadow: inset 0 0 0 0 #725AC1;
+  }
+  
+  button:hover {
+	color: white;
+	box-shadow: inset 0 -100px 0 0 #725AC1;
+  }
+  
+  button:active {
+	transform: scale(0.9);
   }
 
 
@@ -232,7 +267,7 @@ button:hover {
 	display: flex;
 	flex-wrap: wrap;    
 	justify-content: space-around;
-	background-color: #f2f2f2;
+	background-color: #e2e8f0;
 }
 .footer{
 	padding: 7em 0 7em 0; 
@@ -292,7 +327,7 @@ button:hover {
   
 .title {
     font-size: 1.55rem;
-    color: #6A679E; 
+    color: white; 
     text-decoration: none;
 	letter-spacing: .1em;
 	margin-left: 100px;
@@ -301,11 +336,11 @@ button:hover {
 	/* margin-right: 200px; */
 }
 .title :visited{
-    color: #6A679E;
+    color: white;
 }
 header {
-    background-color: transparent;
-    color: #6A679E;
+    background-color: #7d7ba3;;
+    color: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -329,8 +364,8 @@ header {
   .logout-btn {
     text-decoration: none;
     padding: 10px 20px;
-    background-color: #7d7ba3;
-    color: #fff;
+    background-color: white;
+    color: #7d7ba3;;
     border-radius: 5px;
     border-style: outset;
     border-color: transparent;
@@ -372,7 +407,7 @@ header {
   .cover {
 	position: absolute;
 	margin: auto;
-	margin-top: 100px;
+	margin-top: 210px;
 	margin-right: 100px;
 	top: 10px;
 	left: 0;
@@ -492,7 +527,7 @@ header {
 .navbar-nav{
 	position: absolute;
 	margin: auto;
-	margin-top: 30px;
+	margin-top: 90px;
 	margin-right: 40px;
 	top: 10px;
 	left: 0;
@@ -517,7 +552,10 @@ header {
 	width: 300px;
 	height: 42px;
 	margin: 100px auto 0 auto;
+	margin-top: 250px;
 	z-index: 1;
+	margin-left: 80px;
+	margin-bottom: 100px;
   }
   
   #select-button {
@@ -835,7 +873,8 @@ header {
 	top: 80px;
 	background-color: #0057ff;
   }
-  
-  
-  
+  .category{
+	margin-top: 20px;
+  }
+
 
