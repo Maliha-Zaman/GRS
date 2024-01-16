@@ -41,10 +41,6 @@ def get_args():
 def main():
     # Argument parsing #################################################################
     args = get_args()
-
-    start_time = time.time()
-    interval = 5
-
     cap_device = args.device
     cap_width = args.width
     cap_height = args.height
@@ -79,14 +75,15 @@ def main():
               encoding='utf-8-sig') as f:
         keypoint_classifier_labels = csv.reader(f)
         keypoint_classifier_labels = [
-            row[0] for row in keypoint_classifier_labels
+            row[0] for row in keypoint_classifier_labels if row
         ]
+    
     with open(
             'model/point_history_classifier/point_history_classifier_label.csv',
             encoding='utf-8-sig') as f:
         point_history_classifier_labels = csv.reader(f)
         point_history_classifier_labels = [
-            row[0] for row in point_history_classifier_labels
+            row[0] for row in point_history_classifier_labels if row
         ]
 
     # FPS Measurement ########################################################
@@ -102,11 +99,10 @@ def main():
     #  ########################################################################
     mode = 0
     countdown_start_time = time.time()
-    countdown_duration = 6
+    countdown_duration = 7
     countdown_active = True
     while True:
         fps = cvFpsCalc.get()
-
         # Process Key (ESC: end) #################################################
         key = cv.waitKey(10)
         if key == 27:  # ESC
@@ -129,7 +125,6 @@ def main():
 
         # Detection implementation #############################################################
         image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-
         image.flags.writeable = False
         results = hands.process(image)
         image.flags.writeable = True
@@ -195,13 +190,13 @@ def main():
                 # print("Finger Gesture:", point_history_classifier_labels[finger_gesture_id])  # Print the finger gesture
 
                 # Display gestures in the terminal
+                print(keypoint_classifier_labels[hand_sign_id])
 
-                current_time = time.time()
-                if current_time - start_time >= interval:
+                # current_time = time.time()
+                # if current_time - start_time >= interval:
                     # Print the hand sign and finger gesture
                     # Reset the timing
-                    print(keypoint_classifier_labels[hand_sign_id])
-                    start_time = current_time
+                    # start_time = current_time
                     
                     # Screen reflection #############################################################
             cv.imshow('Hand Gesture Recognition', debug_image)
@@ -232,7 +227,6 @@ def main():
 
     cap.release()
     cv.destroyAllWindows()
-
 
 def select_mode(key, mode):
     number = -1
