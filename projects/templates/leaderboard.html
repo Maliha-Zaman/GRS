@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Simulation</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/start_backend.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/leaderboard.css">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
 </head>
@@ -32,63 +32,25 @@
     
   </header>
 <body>
-  <div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
- </div>
-  <div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
- </div>
+
     <!-- <h1>Click to Start Backend</h1> -->
     <div class="container">
-      <div class="screen">
-        <div class="screen__content">
-          <div class="login__field">
-            <p class="text">Leaderboard</p>
+      <div class="table">
+          <div class="table-header">
+              <div class="header__item"><a id="name" class="filter__link" href="#">User</a></div>
+              <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Total Tests</a></div>
           </div>
-
-
-          <div class="previous">
-            
-            <div>
-<<<<<<< HEAD
-              {% comment %} <p>Percentage: {{ percentage }}</p> {% endcomment %}
-=======
-
->>>>>>> e8ff8de3cb46a5eca10932bf49864c24b7b1121f
-              <h2>Leaderboard</h2>
-                <table>
-                  <tr>
-                    <th>User</th>
-                    <th>Total Tests</th>
-                  </tr>
-                  {% for user_count in user_counts %}
-                    <tr>
-                      <td>{{ user_count.username }}</td>
-                      <td>{{ user_count.true_match_count }}</td>
-                    </tr>
-                  {% endfor %}
-                </table>
-
-
-            <div>
-<<<<<<< HEAD
-            {% comment %} <div>
-                <img src="data:image/png;base64,{{ pie_chart }}" alt="True vs False Matches Pie Chart">
-            </div> {% endcomment %}
+          <div class="table-content">
+              {% for user_count in user_counts %}
+                  <div class="table-row">
+                      <div class="table-data">{{ user_count.username }}</div>
+                      <div class="table-data">{{ user_count.true_match_count }}</div>
+                  </div>
+              {% endfor %}
           </div>
-          <!-- Add this to your test.html template -->
-          {% comment %} <div>
-            <img src="data:image/png;base64,{{ match_graph }}" alt="Match vs Number of Tests Taken">
-          </div> {% endcomment %}
-=======
->>>>>>> e8ff8de3cb46a5eca10932bf49864c24b7b1121f
-        </div>
       </div>
-    </div>
+  </div>
+  
 
         <footer class="footer">
             <div class="containers">
