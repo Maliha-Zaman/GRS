@@ -24,7 +24,9 @@ GRS bridges the gap with the deaf-mute community by making communication easier.
 
 ## Getting Started
 Just clone the whole project and run this: 
-> python mananage.py runserver
+```
+python mananage.py runserver
+```
 
 ## Demo
 Installation instructions.
