@@ -14,7 +14,7 @@ import mediapipe as mp
 from utils import CvFpsCalc
 from model import KeyPointClassifier
 from model import PointHistoryClassifier
-from datetime import datetime, timedelta
+
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -102,8 +102,7 @@ def main():
 
     #  ########################################################################
     mode = 0
-    countdown_timer = 5
-    start_timer = False
+    
     while True:
         fps = cvFpsCalc.get()
 
@@ -113,20 +112,6 @@ def main():
             break
         number, mode = select_mode(key, mode)
 
-         # Countdown timer handling
-        if start_timer:
-            cv.putText(debug_image, "Timer: " + str(countdown_timer), (10, 60),
-                       cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 4, cv.LINE_AA)
-            cv.putText(debug_image, "Timer: " + str(countdown_timer), (10, 60),
-                       cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2, cv.LINE_AA)
-            if countdown_timer <= 0:
-                start_timer = False
-                countdown_timer = 5
-            else:
-                countdown_timer -= 1
-        # If no input during countdown timer, skip the input
-        if start_timer and countdown_timer > 0:
-            continue
         # Camera capture #####################################################
         ret, image = cap.read()
         if not ret:
@@ -161,11 +146,10 @@ def main():
 
                 # Hand sign classification
                 hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
-                point_history.append([0, 0])
-                # if hand_sign_id == 2:  # Point gesture
-                #     point_history.append(landmark_list[8])
-                # else:
-                #     point_history.append([0, 0])
+                if hand_sign_id == 2:  # Point gesture
+                    point_history.append(landmark_list[8])
+                else:
+                    point_history.append([0, 0])
 
                 # Finger gesture classification
                 finger_gesture_id = 0
@@ -204,18 +188,8 @@ def main():
 
                 # Display gestures in the terminal
 
-                # current_time = time.time()
-                # if current_time - start_time >= interval:
-                #     # Print the hand sign and finger gesture
-                #     print(keypoint_classifier_labels[hand_sign_id])
-                #     # Reset the timing
-                #     start_time = current_time
-                
                 current_time = time.time()
-                if current_time - start_time >= interval:
-                    # Display the countdown timer on the pop-up screen
-                    start_timer = True
-        
+                if current_time - start_time > interval:
                     # Print the hand sign and finger gesture
                     print(keypoint_classifier_labels[hand_sign_id])
                     # Reset the timing
@@ -570,12 +544,12 @@ def draw_info_text(image, brect, handedness, hand_sign_text,
     cv.putText(image, info_text, (brect[0] + 5, brect[1] - 4),
                cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
 
-    # if finger_gesture_text != "":
-    #     cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
-    #                cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 4, cv.LINE_AA)
-    #     cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
-    #                cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2,
-    #                cv.LINE_AA)
+    if finger_gesture_text != "":
+        cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
+                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 4, cv.LINE_AA)
+        cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
+                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2,
+                   cv.LINE_AA)
 
     return image
 
