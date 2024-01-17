@@ -15,12 +15,24 @@ body {
 	font-family: "Nunito Sans", sans-serif;
 	margin-top: -10px;
  } 
+}
+ h2{
+	font-family: "Nunito Sans", sans-serif;
+	margin-top: -10px;
+ } 
 
 .main_card {
     color: black;
     width: 600px;
     height: 390px;
     margin: 30px auto;
+    max-width: 770px;
+    background: #fff;
+    border-radius: 10px;
+    color: black;
+    width: 600px;
+    height: 390px;
+    margin: 150px auto;
     max-width: 770px;
     background: #fff;
     border-radius: 10px;
@@ -31,6 +43,24 @@ body {
     transition: all 0.3s ease-in-out;
 	border: 2px solid black;
     /* border-style: solid; */
+    border-color: #c2c4ca;
+	
+}
+p{
+font-weight: 400;
+color: #555;
+font-size: 15px;
+line-height: 1.7;
+font-family: "Nunito Sans", sans-serif;
+
+margin-top: -12px;
+margin-bottom: 1rem;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: none;
+    transition: all 0.3s ease-in-out;
+	border-width: 1px;
+    border-style: solid;
     border-color: #c2c4ca;
 	
 }
@@ -558,7 +588,6 @@ header {
 	height: 42px;
 	margin: 100px auto 0 auto;
 	margin-top: 300px;
-	margin-bottom: 100px;
 	z-index: 1;
 	margin-left: 80px;
 	margin-bottom: 100px;
@@ -890,8 +919,4 @@ header {
   font-weight: 800;
   line-height: 1.2;
   margin-left: 660px;
-  }
-
-  .screen{
-	background: #f8f9fa;
   }
