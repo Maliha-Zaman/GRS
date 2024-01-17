@@ -39,28 +39,31 @@
     <div class="container">
         <div class="screen">
             <div class="screen__content">
-                <!-- Include other HTML elements for your page -->
-            
-                <!-- Display the 're' variable content -->
-
-
               <div class="login__field">
-                  <p class="text">Start Moving Gesture Simulation</p>
-              </div>
-              
-              
-              <form method="post" >
-                  <div class="divide">
-                    <div class="vidButton">
-
-                        {% csrf_token %} 
-                        
-                        
-                        <div class="Simulation">
-                          <video src="../static/videos/simulation.mp4" muted loop autoplay></video>
-                        </div>  
-                        
-                        <button type="submit" name="start_button" class="submit" action="{% url 'start_backendMultiple' %}">
+                <p class="text">SIMULATION</p>  
+                  
+            </div>
+            <form method="post" >
+                <div class="divide">
+                  <div class="vidButton">
+                      {% csrf_token %}
+                      <div class="Simulation">
+                        <video src="../static/videos/simulation.mp4" muted loop autoplay></video>
+                      </div>  
+                      
+                      
+                    </div>
+                    <div class="row2">
+                      <div class="card2">
+                          <h4>Simulation</h4>
+                          <p>You can simulate your moving gestures to make sentences. Instructions:</p>
+                          <p>You can use the simulation to see whether your moving gestures are correct or not. This is for practicing your gestures in order to improve your communication skills.</p>
+                          
+                        </div>
+                      
+                      
+                        <div class="submit-button">
+                        <button type="submit" name="start_button" class="submit" action="{% url 'moving' %}">
                           <div class="svg-wrapper-1">
                             <div class="svg-wrapper">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -71,21 +74,25 @@
                           </div>
                           <span class="button__text">START</span>
                         </button>
-                        
                       </div>
-                      <div class="labelbox">
-                        <div class="para">
-                          <p>You can simulate your moving gestures to make sentences. Instructions:</p>
-                          <p>You can use the simulation to see whether your moving gestures are correct or not. This is for practicing your gestures in order to improve your communication skills.</p>
-                        </div>
-                        <!-- <div class="output">
-                          <p>Output:</p>
-                          <p>{{ gestures_output }}</p>
-                          <p>{{ gestures_output_bangla }}</p>
-                        </div> -->
+                  </div>
+                    {% comment %} <div class="box"> {% endcomment %}
+                      {% comment %} <h3>Static gestures</h3>
+                      <p>You can simulate your static gestures to make sentences. Instructions:</p>
+                      <p>Every 5 seconds, the input is taken and the word is stored and later on displayed when the pop up is closed. At a single time, we can create only one sentence.</p> {% endcomment %}
+                      {% comment %} <a href="{% url 'start_backend' %}"><button  class="simulation-button">Simulation</button></a> {% endcomment %}
+                    {% comment %} </div> {% endcomment %}
+                    {% comment %} <div class="labelbox">
+                      <div class="para">
+                        <p>You can simulate your static gestures to make sentences. Instructions:</p>
+                        <p>Every 5 seconds, the input is taken and the word is stored and later on displayed when the pop up is closed. At a single time, we can create only one sentence.</p>
                       </div>
-                    </div>
-                  </form>
+                      <div class="output">
+                      </div>
+                       {% endcomment %}
+                    {% comment %} </div> {% endcomment %}
+                  </div>
+                </form>
         </div>
 
     </div>

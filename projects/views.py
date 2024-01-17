@@ -172,9 +172,8 @@ def start_backend(request):
             # Start the backend script (app.py)
             # Popen(["python", "app.py"])
             result = subprocess.check_output(['python', 'app.py'], universal_newlines=True)
-            result = ' '.join(result.splitlines())
-            # re = (nlp(result))
-            re = happy_tt.generate_text(result, args=args).text
+            re = ' '.join(result.splitlines())
+
             translator = Translator()
             re1 = translator.translate(re, dest='bn').text
     return render(request, 'start_backend.html',{'user':user,'gestures_output': re, 'gestures_output_bangla': re1})
@@ -326,6 +325,7 @@ def leaderboard(request):
     user_counts = (
         User.objects
         .annotate(true_match_count=Count('test', filter=Q(test__match=True)))
+        .annotate(total_tests_count=Count('test'))
         .order_by('-true_match_count')
     )
     

@@ -32,78 +32,93 @@
     
   </header>
 <body>
-  <div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
- </div>
-  <div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
- </div>
+
     <!-- <h1>Click to Start Backend</h1> -->
     <div class="container">
       <div class="screen">
         <div class="screen__content">
           <div class="login__field">
-            <p class="text">Test</p>
-          </div>
-          <form method="post" >
+            <p class="text">TEST</p>  
+        </div>
+        <form method="post" >
             <div class="divide">
               <div class="vidButton">
-                {% csrf_token %} 
-
-                <div class="Simulation">
+                  {% csrf_token %}
+                  <div class="Simulation">
                     <video src="../static/videos/simulation.mp4" muted loop autoplay></video>
-                </div>  
-                <div class="text">
-                    <select name="text" id="text" class="text" required="">
-                      <option value="" selected disabled>Select Text</option>
-                      <option value="I">I</option>
-                      <option value="You">You</option>
-                      <option value="Peace">Peace</option>
-                    </select>
+                    <div class="dropdown">
+                      <select name="text" id="text" class="text" required="">
+                        <option value="" selected disabled>Select Text</option>
+                        <option value="I">I</option>
+                        <option value="You">You</option>
+                        <option value="Peace">Peace</option>
+                        <option value="Open">Close</option>
+                        <option value="OK">OK</option>
+                        <option value="Love">Love</option>
+                        <option value="Goodluck">Goodluck</option>
+                        <option value="Thankyou">Thankyou</option>
+                        <option value="Agree">Agree</option>
+                        <option value="Disagree">Disagree</option>
+                        <option value="Welcome">Welcome</option>
+                        <option value="Little bit">Little bit</option>
+                        <option value="How">How</option>
+                        <option value="Sick">Sick</option>
+                        <option value="Hungry">Hungry</option>
+                      </select>
+                    </div>  
+                  </div>  
+
+                  
                 </div>
-                <button type="submit" name="test" class="submit" action="{% url 'test' %}">
-                  <div class="svg-wrapper-1">
-                    <div class="svg-wrapper">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                        <path fill="none" d="M0 0h24v24H0z"></path>
-                        <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-                      </svg>
+                <div class="row2">
+                  <div class="card2">
+                      <h4>Static Gestures</h4>
+                      <p>You can simulate your moving gestures to make sentences. Instructions:</p>
+                      <p>You can use the simulation to see whether your moving gestures are correct or not. This is for practicing your gestures in order to improve your communication skills.</p>
+                      
                     </div>
-                  </div>
-                  <span class="button__text">START</span>
-                </button>
+                    
+                    <div class="card3">
+                      <h4>Output:</h4>
+                      <p>{{ gestures_output }}</p>
+                      <p>{{ gestures_output_bangla }}</p>
+                    </div>
+                    <div class="submit-button">
+                      <button type="submit" name="test" class="submit" action="{% url 'test' %}">
+                        <div class="svg-wrapper-1">
+                          <div class="svg-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                              <path fill="none" d="M0 0h24v24H0z"></path>
+                              <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <span class="button__text">START</span>
+                      </button>
+                    </div>
+                  </form>
+                  
+                </div>
+                
               </div>
-              <div class="labelbox">
-                <div class="para">
-                  <p>You can simulate your moving gestures to make sentences. Instructions:</p>
-                  <p>You can use the simulation to see whether your moving gestures are correct or not. This is for practicing your gestures in order to improve your communication skills.</p>
-                </div>
-                <div class="output">
-                  <p>Output:</p>
-                  <p>{{ gestures_output }}</p>
-                  <p>{{ gestures_output_bangla }}</p>
-                </div>
+              <div class="previous_result">
+                <a href="{% url 'test_history' %}">
+                  <button class="submit" >
+                    <div class="svg-wrapper-1">
+                      <div class="svg-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <span class="button__text">Previous Results</span>
+                  </button>
+                </a>
+              </div>
+                
               </div>
               
-            </div>
-          </form>
-          <a href="{% url 'test_history' %}">
-            <button class="submit" action="{% url 'test_history' %}">
-              <div class="svg-wrapper-1">
-                <div class="svg-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-                  </svg>
-                </div>
-              </div>
-              <span class="button__text">Previous Results</span>
-            </button>
-        </a>
           <!-- Add this to your test.html template -->
           {% comment %} <div>
             <img src="data:image/png;base64,{{ match_graph }}" alt="Match vs Number of Tests Taken">
@@ -111,7 +126,6 @@
         </div>
       </div>
     </div>
-
         <footer class="footer">
             <div class="containers">
               <div class="row">

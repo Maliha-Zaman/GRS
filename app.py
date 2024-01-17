@@ -176,9 +176,6 @@ def main():
                 )
                 # Hand sign classification
                 hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
-                # print("Hand Sign:", keypoint_classifier_labels[hand_sign_id])  # Print the hand sign
-
-                # ...
 
                 # Finger gesture classification
                 finger_gesture_id = 0
@@ -190,10 +187,8 @@ def main():
                 # Display gestures in the terminal
 
                 current_time = time.time()
-                if current_time - start_time >= interval:
-                    # Print the hand sign and finger gesture
+                if current_time - start_time >= interval:                    # Print the hand sign and finger gesture
                     print(keypoint_classifier_labels[hand_sign_id])
-                    # Reset the timing
                     start_time = current_time
 
         else:

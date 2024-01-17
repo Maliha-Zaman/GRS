@@ -32,45 +32,35 @@
     
   </header>
 <body>
-  <div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
- </div>
-  <div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
- </div>
-    <!-- <h1>Click to Start Backend</h1> -->
-    <div class="container">
+    <div class="container1">
       <div class="screen">
         <div class="screen__content">
           <div class="login__field">
             <p class="text">Leaderboard</p>
           </div>
-
-
-          <div class="previous">
-            
-            <div>
-
-              <h2>Leaderboard</h2>
-                <table>
+          <div class="row2">
+            <center>
+            <div class="card2">
+                <h4>Current Leaderboard Table:</h4>
+                <table class="user-table">
                   <tr>
                     <th>User</th>
-                    <th>Total Tests</th>
-                  </tr>
-                  {% for user_count in user_counts %}
-                    <tr>
-                      <td>{{ user_count.username }}</td>
-                      <td>{{ user_count.true_match_count }}</td>
-                    </tr>
-                  {% endfor %}
-                </table>
-
-
-            <div>
+                  <th>Total Success</th>
+                  <th>Total Tries</th>
+                </tr>
+                {% for user_count in user_counts %}
+                {% comment %} {% for user_total in user_total %} {% endcomment %}
+                <tr>
+                  <td>{{ user_count.username }}</td>
+                  <td>{{ user_count.true_match_count }}</td>
+                  <td>{{ user_count.total_tests_count }}</td>
+                </tr>
+                {% comment %} {% endfor %} {% endcomment %}
+                {% endfor %}
+              </table>
+            </div>
+          </center>
+          </div>
         </div>
       </div>
     </div>
